@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background = "@drawable/bg_gradient">
+    <item
+        android:id="@+id/action_camera"
+        android:icon="@drawable/camera"
+        android:title="Upload"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_wardrobe"
+        android:icon="@drawable/wardrobe"
+        android:title="Wardrobe"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_outfits"
+        android:icon="@drawable/hanger"
+        android:title="Outfits"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/profile"
+        android:title="Profile"
+        app:showAsAction="always" />
+</menu>
