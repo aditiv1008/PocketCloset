@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView bottomNavigation;
     CameraFragment cameraFragment = new CameraFragment();
     OutfitsFragment outfitsFragment = new OutfitsFragment();
-    WardrobeFragment wardrobeFragment = new WardrobeFragment();
+    WardrobeFragment wardrobeFragment = new WardrobeFragment(ParseUser.getCurrentUser());
     ProfileFragment profileFragment = new ProfileFragment();
 
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        bottomNavigation.setSelectedItemId(R.id.action_wardrobe);
+        bottomNavigation.setSelectedItemId(R.id.action_camera);
     }
 
 
@@ -71,4 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
