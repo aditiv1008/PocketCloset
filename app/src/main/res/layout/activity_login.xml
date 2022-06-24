@@ -84,24 +84,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView"
-        android:layout_width="204dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="136dp"
-
+        android:layout_width="301dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="132dp"
+        android:fontFamily="@font/pacifico"
+        android:text="PocketCloset"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="76dp"
-        android:layout_height="77dp"
+        android:layout_width="86dp"
+        android:layout_height="87dp"
         android:layout_marginStart="164dp"
         android:layout_marginTop="36dp"
+        android:background="@drawable/highheel"
         android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
