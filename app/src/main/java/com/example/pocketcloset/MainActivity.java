@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView bottomNavigation;
     CameraFragment cameraFragment = new CameraFragment();
     OutfitsFragment outfitsFragment = new OutfitsFragment();
-    WardrobeFragment wardrobeFragment = new WardrobeFragment(ParseUser.getCurrentUser());
+    WardrobeFragment wardrobeFragment = new WardrobeFragment();
     ProfileFragment profileFragment = new ProfileFragment();
 
 
@@ -41,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
                         fragment = cameraFragment;
                         break;
                     case R.id.action_wardrobe:
+                        //put bundle information
+                        Bundle bundl = new Bundle();
+                        bundl.putParcelable("userToFilterBy", ParseUser.getCurrentUser() );
                         fragment = wardrobeFragment;
+                        fragment.setArguments(bundl);
                         break;
                     case R.id.action_outfits:
                         fragment = outfitsFragment;
