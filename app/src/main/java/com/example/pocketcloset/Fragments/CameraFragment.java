@@ -3,7 +3,6 @@ package com.example.pocketcloset.Fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.icu.util.Output;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -29,9 +28,8 @@ import com.parse.ParseFile;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,15 +38,15 @@ import java.io.OutputStream;
  */
 public class CameraFragment extends Fragment {
 
-    public static final int GET_FROM_GALLERY = 3;
+    private static final int GET_FROM_GALLERY = 3;
     private ImageButton ibPhoto;
-    public ImageView ivPostedPhoto;
+    private ImageView ivPostedPhoto;
     private ImageButton ibAdd;
     private Bitmap bitmap;
     private ImageButton ibCamera;
-    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
-    public File photoFile;
-    public String photoFileName = "photo.jpg";
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    private File photoFile;
+    private String photoFileName = "photo.jpg";
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -113,7 +111,7 @@ public class CameraFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
-                            }
+            }
         });
 
         ibAdd.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +132,6 @@ public class CameraFragment extends Fragment {
 
                 }
         });
-
 
     }
     public File getPhotoFileUri(String fileName) {
@@ -173,7 +170,6 @@ public class CameraFragment extends Fragment {
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
