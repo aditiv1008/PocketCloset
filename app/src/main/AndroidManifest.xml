@@ -6,23 +6,27 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/highheel"
+        android:icon="@mipmap/highheel"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/highheel"
+        android:roundIcon="@mipmap/highheel"
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketCloset"
         tools:targetApi="31">
+        <activity
+            android:name=".SaveClothingView"
+            android:exported="false" />
         <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

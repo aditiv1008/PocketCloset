@@ -104,7 +104,7 @@
         android:layout_height="87dp"
         android:layout_marginStart="164dp"
         android:layout_marginTop="36dp"
-        android:background="@drawable/highheel"
+        android:background="@mipmap/highheel"
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
