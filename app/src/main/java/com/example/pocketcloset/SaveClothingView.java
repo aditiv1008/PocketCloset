@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,13 +35,14 @@ public class SaveClothingView extends AppCompatActivity {
     private MaterialButtonToggleGroup toggleButton;
     private ImageButton ibAdd;
     private ImageView ivSavedPhoto;
-    public Button btnHeadwear;
-    public Button btnTops;
-    public Button btnOverwear;
-    public Button btnBottoms;
-    public Button btnAccessories;
-    public Button btnShoes;
-    public MaterialButtonToggleGroup toggleButtonBottoms;
+    private Button btnHeadwear;
+    private Button btnTops;
+    private Button btnOverwear;
+    private Button btnBottoms;
+    private Button btnAccessories;
+    private Button btnShoes;
+    private MaterialButtonToggleGroup toggleButtonBottoms;
+    private MaterialButtonToggleGroup toggleAccessories;
     protected List<Clothing> allClothing;
     CameraFragment cameraFragment;
 
@@ -52,6 +54,7 @@ public class SaveClothingView extends AppCompatActivity {
 
         ibAdd = findViewById(R.id.ibAdd);
         ivSavedPhoto = findViewById(R.id.ivSavedPhoto);
+        toggleAccessories = findViewById(R.id.toggleAccessories);
         toggleButton = findViewById(R.id.toggleButton);
         btnAccessories = findViewById(R.id.btnAccessories);
         btnTops = findViewById(R.id.btnTop);
@@ -61,12 +64,17 @@ public class SaveClothingView extends AppCompatActivity {
         btnShoes = findViewById(R.id.btnShoes);
         toggleButtonBottoms = findViewById(R.id.toggleButtonBottoms);
         toggleButtonBottoms.setVisibility(View.GONE);
+        toggleAccessories.setVisibility(View.GONE);
 
         toggleButton.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
                 if (checkedId == R.id.btnBottoms) {
                     toggleButtonBottoms.setVisibility(View.VISIBLE);
+                    toggleButton.setVisibility(View.GONE);
+                }
+                if (checkedId == R.id.btnAccessories) {
+                    toggleAccessories.setVisibility(View.VISIBLE);
                     toggleButton.setVisibility(View.GONE);
                 }
                 ibAdd.setOnClickListener(new View.OnClickListener() {
@@ -76,31 +84,27 @@ public class SaveClothingView extends AppCompatActivity {
 
                         switch (checkedId) {
                             case R.id.btnTop:
-                                addClothing("Top");
-
+                                addClothing(ClothingType.TOP);
                                 break;
 
                             case R.id.btnBottoms:
-                                addClothing("Pants");
+                                addClothing(ClothingType.PANTS);
                                 break;
 
                             case R.id.btnShoes:
-                                addClothing("Shoes");
-
+                                addClothing(ClothingType.SHOES);
                                 break;
 
                             case R.id.btnHeadwear:
-
-                                addClothing("Headwear");
+                                addClothing(ClothingType.HEADWEAR);
                                 break;
 
                             case R.id.btnOverwear:
-
-                                addClothing("Overwear");
-
+                                addClothing(ClothingType.OVERWEAR);
                                 break;
+
                             case R.id.btnAccessories:
-                                addClothing("Earrings");
+                                addClothing(ClothingType.EARRINGS);
 
                         }
 
@@ -117,20 +121,21 @@ public class SaveClothingView extends AppCompatActivity {
                     toggleButtonBottoms.setVisibility(View.VISIBLE);
                     toggleButton.setVisibility(View.GONE);
                 }
+
                 ibAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         switch (checkedId) {
                             case R.id.btnSkirt:
-                                addClothing("Skirt");
+                                addClothing(ClothingType.SKIRT);
                                 break;
 
                             case R.id.btnPants:
-                                addClothing("Pants");
+                                addClothing(ClothingType.PANTS);
                                 break;
 
                             case R.id.btnDress:
-                                addClothing("Dress");
+                                addClothing(ClothingType.DRESS);
                                 break;
 
 
@@ -138,6 +143,42 @@ public class SaveClothingView extends AppCompatActivity {
                     }
                 });
                 }
+        });
+
+
+
+        toggleAccessories.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+            @Override
+            public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+                if (checkedId == R.id.btnAccessories) {
+                    toggleAccessories.setVisibility(View.VISIBLE);
+                    toggleButton.setVisibility(View.GONE);
+                }
+                ibAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (checkedId) {
+                            case R.id.btnBracelets:
+                                addClothing(ClothingType.BRACELET);
+                                break;
+
+                            case R.id.btnEarrings:
+                                addClothing(ClothingType.EARRINGS);
+                                break;
+
+                            case R.id.btnNeckwear:
+                                addClothing(ClothingType.NECKWEAR);
+                                break;
+
+                            case R.id.btnHandhelds:
+                                addClothing(ClothingType.HANDHELD);
+                                break;
+
+
+                        }
+                    }
+                });
+            }
         });
     }
 
@@ -155,7 +196,6 @@ public class SaveClothingView extends AppCompatActivity {
                     Log.e("MainActivity", "Error while saving", e);
                     Toast.makeText(SaveClothingView.this, "Error while saving", Toast.LENGTH_SHORT);
                 }
-                Log.i("MainActivity", "Post save was sucessful");
                 goMainActivity();
 
             }
@@ -168,7 +208,6 @@ public class SaveClothingView extends AppCompatActivity {
     }
     private void goMainActivity() {
         Intent i = new Intent(SaveClothingView.this, MainActivity.class);
-
         startActivity(i);
         finish();
     }

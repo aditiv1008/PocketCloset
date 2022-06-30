@@ -6,9 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ToggleButton;
+
 
 
 import androidx.annotation.NonNull;
@@ -19,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.pocketcloset.ClothingType;
 import com.example.pocketcloset.R;
 import com.example.pocketcloset.adapters.ClothingAdapter;
 import com.example.pocketcloset.models.Clothing;
-import com.example.pocketcloset.models.User;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -42,6 +40,7 @@ public class WardrobeFragment extends Fragment {
     private RecyclerView rvWardrobe;
     private ParseUser user;
     private MaterialButtonToggleGroup toggleButton;
+    private MaterialButtonToggleGroup toggleButtonAccessories;
     private Button btnHeadwear;
     private Button btnTops;
     private Button btnOverwear;
@@ -52,6 +51,10 @@ public class WardrobeFragment extends Fragment {
     private Button btnDress;
     private Button btnBack;
     private Button btnSkirt;
+    private Button btnNeckwear;
+    private Button btnEarrings;
+    private Button btnHandhelds;
+    private Button btnBracelet;
 
     public MaterialButtonToggleGroup toggleButtonBottoms;
 
@@ -83,6 +86,8 @@ public class WardrobeFragment extends Fragment {
         rvWardrobe = view.findViewById(R.id.rvClothes);
         toggleButton = view.findViewById(R.id.toggleButton);
         toggleButtonBottoms = view.findViewById(R.id.toggleButtonBottoms);
+        toggleButtonAccessories = view.findViewById(R.id.toggleAccessories);
+        toggleButtonAccessories.setVisibility(View.INVISIBLE);
         toggleButtonBottoms.setVisibility(View.INVISIBLE);
         btnAccessories = view.findViewById(R.id.btnAccessories);
         btnTops = view.findViewById(R.id.btnTop);
@@ -91,6 +96,10 @@ public class WardrobeFragment extends Fragment {
         btnBottoms = view.findViewById(R.id.btnBottoms);
         btnPants = view.findViewById(R.id.btnPants);
         btnDress = view.findViewById(R.id.btnDress);
+        btnBracelet = view.findViewById(R.id.btnBracelets);
+        btnNeckwear = view.findViewById(R.id.btnNeckwear);
+        btnEarrings = view.findViewById(R.id.btnEarrings);
+        btnHandhelds = view.findViewById(R.id.btnHandhelds);
         btnShoes = view.findViewById(R.id.btnShoes);
         btnBack = view.findViewById(R.id.btnBack);
         btnBack.setVisibility(View.GONE);
@@ -130,7 +139,7 @@ public class WardrobeFragment extends Fragment {
            @Override
            public void onClick(View v) {
                adapter.clear();
-               queryClothes("Top");
+               queryClothes(ClothingType.TOP);
                adapter.notifyDataSetChanged();
            }
        });
@@ -139,7 +148,7 @@ public class WardrobeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.clear();
-                queryClothes("Overwear");
+                queryClothes(ClothingType.OVERWEAR);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -147,15 +156,21 @@ public class WardrobeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.clear();
-                queryClothes("Headwear");
+                queryClothes(ClothingType.HEADWEAR);
                 adapter.notifyDataSetChanged();
             }
         });
         btnAccessories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton.setVisibility(View.GONE);
+                btnBack.setVisibility(View.VISIBLE);
+                toggleButtonAccessories.setVisibility(View.VISIBLE);
                 adapter.clear();
-                queryClothes("Earrings");
+                queryClothes(ClothingType.EARRINGS);
+                queryClothes(ClothingType.HANDHELD);
+                queryClothes(ClothingType.NECKWEAR);
+                queryClothes(ClothingType.BRACELET);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -163,7 +178,7 @@ public class WardrobeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.clear();
-                queryClothes("Shoes");
+                queryClothes(ClothingType.SHOES);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -174,8 +189,9 @@ public class WardrobeFragment extends Fragment {
                 btnBack.setVisibility(View.VISIBLE);
                 toggleButtonBottoms.setVisibility(View.VISIBLE);
                 adapter.clear();
-               queryClothes("Dress");
-               queryClothes("Pants");
+               queryClothes(ClothingType.DRESS);
+               queryClothes(ClothingType.PANTS);
+                queryClothes(ClothingType.SKIRT);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -186,7 +202,7 @@ public class WardrobeFragment extends Fragment {
                 toggleButton.setVisibility(View.INVISIBLE);
                 toggleButtonBottoms.setVisibility(View.VISIBLE);
                 adapter.clear();
-                queryClothes("Dress");
+                queryClothes(ClothingType.DRESS);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -196,7 +212,47 @@ public class WardrobeFragment extends Fragment {
                 toggleButton.setVisibility(View.GONE);
                 toggleButtonBottoms.setVisibility(View.VISIBLE);
                 adapter.clear();
-                queryClothes("Pants");
+                queryClothes(ClothingType.PANTS);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btnBracelet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleButton.setVisibility(View.GONE);
+                toggleButtonAccessories.setVisibility(View.VISIBLE);
+                adapter.clear();
+                queryClothes(ClothingType.BRACELET);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btnEarrings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleButton.setVisibility(View.GONE);
+                toggleButtonAccessories.setVisibility(View.VISIBLE);
+                adapter.clear();
+                queryClothes(ClothingType.EARRINGS);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btnNeckwear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleButton.setVisibility(View.GONE);
+                toggleButtonAccessories.setVisibility(View.VISIBLE);
+                adapter.clear();
+                queryClothes(ClothingType.NECKWEAR);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        btnHandhelds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleButton.setVisibility(View.GONE);
+                toggleButtonAccessories.setVisibility(View.VISIBLE);
+                adapter.clear();
+                queryClothes(ClothingType.HANDHELD);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -206,16 +262,18 @@ public class WardrobeFragment extends Fragment {
                 toggleButton.setVisibility(View.GONE);
                 toggleButtonBottoms.setVisibility(View.VISIBLE);
                 adapter.clear();
-                queryClothes("Skirt");
+                queryClothes(ClothingType.SKIRT);
                 adapter.notifyDataSetChanged();
             }
         });
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleButton.setVisibility(View.VISIBLE);
                 toggleButtonBottoms.setVisibility(View.GONE);
+                toggleButtonAccessories.setVisibility(View.GONE);
                 btnBack.setVisibility(View.GONE);
                 adapter.clear();
                 queryClothes(null);
@@ -225,36 +283,6 @@ public class WardrobeFragment extends Fragment {
 
        queryClothes(null);
     }
-
-  /*  protected void queryClothes() {
-        // specify what type of data we want to query - Post.class
-        ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
-        // include data referred by user key
-        //query.include(Clothing.CLOTHING_TYPE);
-        query.include(Clothing.KEY_CLOTHING_IMAGE);
-        query.whereEqualTo(Clothing.KEY_USER, user);
-        // limit query to latest 20 items
-        query.setLimit(20);
-        // order posts by creation date (newest first)
-        query.addDescendingOrder("createdAt");
-        // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<Clothing>() {
-            @Override
-            public void done(List<Clothing> clothes, ParseException e) {
-                // check for errors
-                if (e != null) {
-                    Log.e("WardrobeFragment", "Issue with getting clothing", e);
-                    return;
-                }
-                // save received posts to list and notify adapter of new data
-                adapter.clear();
-                allClothing.addAll(clothes);
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-
-    }*/
 
 
     protected void queryClothes( @Nullable String clothingType) {
@@ -280,9 +308,7 @@ public class WardrobeFragment extends Fragment {
                     Log.e("WardrobeFragment", "Issue with getting clothing", e);
                     return;
                 }
-
                 // save received posts to list and notify adapter of new data
-                 //adapter.clear();
                 allClothing.addAll(clothes);
                 adapter.notifyDataSetChanged();
             }
