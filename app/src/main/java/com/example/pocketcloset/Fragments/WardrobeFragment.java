@@ -1,5 +1,6 @@
 package com.example.pocketcloset.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pocketcloset.ClothingType;
+import com.example.pocketcloset.LoginActivity;
+import com.example.pocketcloset.MainActivity;
 import com.example.pocketcloset.R;
+import com.example.pocketcloset.RandomizedView;
 import com.example.pocketcloset.adapters.ClothingAdapter;
 import com.example.pocketcloset.models.Clothing;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -55,6 +60,7 @@ public class WardrobeFragment extends Fragment {
     private Button btnEarrings;
     private Button btnHandhelds;
     private Button btnBracelet;
+    private FloatingActionButton btnRandomize;
 
     public MaterialButtonToggleGroup toggleButtonBottoms;
 
@@ -90,6 +96,7 @@ public class WardrobeFragment extends Fragment {
         toggleButtonAccessories.setVisibility(View.INVISIBLE);
         toggleButtonBottoms.setVisibility(View.INVISIBLE);
         btnAccessories = view.findViewById(R.id.btnAccessories);
+        btnRandomize = view.findViewById(R.id.btnRandomize);
         btnTops = view.findViewById(R.id.btnTop);
         btnHeadwear = view.findViewById(R.id.btnHeadwear);
         btnOverwear = view.findViewById(R.id.btnOverwear);
@@ -118,6 +125,7 @@ public class WardrobeFragment extends Fragment {
 
         rvWardrobe.setLayoutManager(gridLayoutManager);
 
+
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
          //Setup refresh listener which triggers new data loading
        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -129,17 +137,26 @@ public class WardrobeFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+
        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
+       btnRandomize.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i = new Intent(getContext(), RandomizedView.class);
+               startActivity(i);
+           }
+       });
 
        btnTops.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                adapter.clear();
                queryClothes(ClothingType.TOP);
+               Log.i("Shirt", "" + allClothing.size());
                adapter.notifyDataSetChanged();
            }
        });
@@ -311,6 +328,7 @@ public class WardrobeFragment extends Fragment {
                 // save received posts to list and notify adapter of new data
                 allClothing.addAll(clothes);
                 adapter.notifyDataSetChanged();
+                Log.i("WARDROBE FRAGMENT CLOTHES", "" + allClothing.size());
             }
         });
 

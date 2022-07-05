@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/icon_tint_selector.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15812530517578122" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24815826416015632" />
+        <entry key="app/src/main/res/layout/activity_randomized_view.xml" value="0.2722901520905671" />
         <entry key="app/src/main/res/layout/activity_save_clothing_view.xml" value="0.35128205128205126" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.23796296296296296" />
