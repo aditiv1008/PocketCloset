@@ -189,4 +189,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnRandomize"
+        android:layout_width="62dp"
+        android:layout_height="58dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="20dp"
+        android:foregroundTint="#FFF7F7"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#FA7CBB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
+        app:layout_constraintVertical_bias="0.902"
+        app:srcCompat="@drawable/sparkle"
+        tools:ignore="MissingConstraints" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

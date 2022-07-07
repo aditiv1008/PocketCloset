@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -18,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketCloset"
         tools:targetApi="31">
+        <activity
+            android:name=".RandomizedView"
+            android:exported="false" />
         <activity
             android:name=".SaveClothingView"
             android:exported="false" />
