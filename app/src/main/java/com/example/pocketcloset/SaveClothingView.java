@@ -46,7 +46,6 @@ public class SaveClothingView extends AppCompatActivity {
     protected List<Clothing> allClothing;
     CameraFragment cameraFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,8 +144,6 @@ public class SaveClothingView extends AppCompatActivity {
                 }
         });
 
-
-
         toggleAccessories.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
@@ -203,7 +200,6 @@ public class SaveClothingView extends AppCompatActivity {
         Log.i("SaveClothingView", "Clothing:" + article.getClothingType().toString());
 
         Log.i("SaveClothingView", "Top Button Clicked");
-
 
     }
     private void goMainActivity() {
