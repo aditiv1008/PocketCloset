@@ -14,13 +14,16 @@
         <entry key="app/src/main/res/layout/activity_randomized_view.xml" value="0.2722901520905671" />
         <entry key="app/src/main/res/layout/activity_save_clothing_view.xml" value="0.35128205128205126" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1828125" />
+        <entry key="app/src/main/res/layout/fragment.xml" value="0.275" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.23796296296296296" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.275" />
         <entry key="app/src/main/res/layout/fragment_wardrobe.xml" value="0.294097900390625" />
         <entry key="app/src/main/res/layout/fragment_wardrobe_bottoms.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/item_save_clothing.xml" value="0.3471038818359375" />
         <entry key="app/src/main/res/layout/item_wardrobe_clothing.xml" value="0.18703703703703703" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/fileprovider.xml" value="0.1" />
       </map>
     </option>
   </component>
