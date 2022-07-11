@@ -1,11 +1,6 @@
 package com.example.pocketcloset;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,20 +9,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.pocketcloset.Fragments.CameraFragment;
-import com.example.pocketcloset.Fragments.WardrobeFragment;
 import com.example.pocketcloset.models.Clothing;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import org.json.JSONException;
-import org.parceler.Parcels;
-
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class SaveClothingView extends AppCompatActivity {
@@ -141,7 +131,7 @@ public class SaveClothingView extends AppCompatActivity {
                         }
                     }
                 });
-                }
+            }
         });
 
         toggleAccessories.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
@@ -180,7 +170,6 @@ public class SaveClothingView extends AppCompatActivity {
     }
 
 
-
     public void addClothing(String clothing) {
         Clothing article = new Clothing();
         article.setClothingType(clothing);
@@ -202,6 +191,7 @@ public class SaveClothingView extends AppCompatActivity {
         Log.i("SaveClothingView", "Top Button Clicked");
 
     }
+
     private void goMainActivity() {
         Intent i = new Intent(SaveClothingView.this, MainActivity.class);
         startActivity(i);

@@ -1,13 +1,11 @@
 package com.example.pocketcloset;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -22,7 +20,6 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class RandomizedView extends AppCompatActivity {
     protected List<Clothing> allClothing;
@@ -36,6 +33,7 @@ public class RandomizedView extends AppCompatActivity {
     private ImageView ivEarrings;
     private ImageView ivOverwear;
     private ClothingAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +50,7 @@ public class RandomizedView extends AppCompatActivity {
         ivNecklace = findViewById(R.id.ivNecklace);
         ivOverwear = findViewById(R.id.ivOverwear);
         ivEarrings = findViewById(R.id.ivEarrings);
+
         adapter = new ClothingAdapter(this, allClothing);
         queryClothes(null);
 
@@ -68,35 +67,35 @@ public class RandomizedView extends AppCompatActivity {
     }
 
 
-   public List<Clothing> filterClothing(List<Clothing> allClothing, String clothingType) {
-       ArrayList<Clothing> newClothing = new ArrayList<>();
-       for (int i = 0; i < allClothing.size(); i++) {
-           if (allClothing.get(i).getClothingType().equals(clothingType)) {
-               newClothing.add(allClothing.get(i));
-           }
-       }
-       return newClothing;
-   }
+    public List<Clothing> filterClothing(List<Clothing> allClothing, String clothingType) {
+        ArrayList<Clothing> newClothing = new ArrayList<>();
+        for (int i = 0; i < allClothing.size(); i++) {
+            if (allClothing.get(i).getClothingType().equals(clothingType)) {
+                newClothing.add(allClothing.get(i));
+            }
+        }
+        return newClothing;
+    }
 
-   public void checkClothing (List<Clothing> clothing, String clothingType, ImageView image) {
-       Clothing randomItem = randomizeClothing(clothing, clothingType);
-       ParseFile randomItemClothing = null;
-       if (randomItem != null) {
-           randomItemClothing = randomItem.getClothingImage();
-       }
-       if (randomItem != null && randomItemClothing != null) {
-           Glide.with(RandomizedView.this).load(randomItem.getClothingImage().getUrl()).override(Target.SIZE_ORIGINAL).into(image);
-       }
-   }
+    public void checkClothing(List<Clothing> clothing, String clothingType, ImageView image) {
+        Clothing randomItem = randomizeClothing(clothing, clothingType);
+        ParseFile randomItemClothing = null;
+        if (randomItem != null) {
+            randomItemClothing = randomItem.getClothingImage();
+        }
+        if (randomItem != null && randomItemClothing != null) {
+            Glide.with(RandomizedView.this).load(randomItem.getClothingImage().getUrl()).override(Target.SIZE_ORIGINAL).into(image);
+        }
+    }
 
-    protected void queryClothes( @Nullable String clothingType) {
+    protected void queryClothes(@Nullable String clothingType) {
         // specify what type of data we want to query - Post.class
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
         Log.i("WardrobeFragment", "queryClothes(with params) ran");
         //query.include(Clothing.KEY_CLOTHING_IMAGE);
         query.whereEqualTo(Clothing.KEY_USER, ParseUser.getCurrentUser());
-        if(clothingType != null) {
+        if (clothingType != null) {
             query.whereEqualTo(Clothing.KEY_CLOTHING_TYPE, clothingType);
         }
         // limit query to latest 20 items
@@ -112,7 +111,6 @@ public class RandomizedView extends AppCompatActivity {
                     Log.i("RANDOMIZED VIEW", "Issue with getting clothing", e);
                     return;
                 }
-                // save received posts to list and notify adapter of new data
                 adapter.clear();
                 allClothing.addAll(clothes);
                 adapter.notifyDataSetChanged();
@@ -121,12 +119,15 @@ public class RandomizedView extends AppCompatActivity {
                 checkClothing(allClothing, ClothingType.HEADWEAR, ivHeadwear);
                 checkClothing(allClothing, ClothingType.BRACELET, ivBracelet);
                 checkClothing(allClothing, ClothingType.PANTS, ivBottom);
+                checkClothing(allClothing, ClothingType.DRESS, ivBottom);
+                checkClothing(allClothing, ClothingType.SKIRT, ivBottom);
                 checkClothing(allClothing, ClothingType.TOP, ivTop);
                 checkClothing(allClothing, ClothingType.NECKWEAR, ivNecklace);
                 checkClothing(allClothing, ClothingType.SHOES, ivShoes);
                 checkClothing(allClothing, ClothingType.HANDHELD, ivHandheld);
                 checkClothing(allClothing, ClothingType.EARRINGS, ivEarrings);
                 checkClothing(allClothing, ClothingType.OVERWEAR, ivOverwear);
+
 
             }
         });

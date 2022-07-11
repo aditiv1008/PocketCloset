@@ -1,13 +1,13 @@
 package com.example.pocketcloset;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.pocketcloset.Fragments.CameraFragment;
 import com.example.pocketcloset.Fragments.OutfitsFragment;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_wardrobe:
                         //put bundle information
                         Bundle bundl = new Bundle();
-                        bundl.putParcelable("userToFilterBy", ParseUser.getCurrentUser() );
+                        bundl.putParcelable("userToFilterBy", ParseUser.getCurrentUser());
                         fragment = wardrobeFragment;
                         fragment.setArguments(bundl);
                         break;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_profile:
                     default:
-                      //  profileFragment.user = (User) ParseUser.getCurrentUser();
+                        //  profileFragment.user = (User) ParseUser.getCurrentUser();
                         fragment = profileFragment;
                         break;
                 }
