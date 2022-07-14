@@ -125,7 +125,7 @@
 
         <Button
             android:id="@+id/btnEarrings"
-            android:layout_width="wrap_content"
+            android:layout_width= "wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             app:icon="@drawable/earrings" />
