@@ -9,11 +9,21 @@ import android.view.View.OnTouchListener;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 
+    public interface Callback {
+        public void onSwipeRight();
+        public void onSwipeLeft();
+    }
+
+    private final Callback mCallback;
+
     private final GestureDetector gestureDetector;
 
-    public OnSwipeTouchListener(Context ctx) {
+    public OnSwipeTouchListener(Context ctx, Callback callback) {
         gestureDetector = new GestureDetector(ctx, new GestureListener());
+        mCallback = callback;
     }
+
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -62,9 +72,11 @@ public class OnSwipeTouchListener implements OnTouchListener {
     }
 
     public void onSwipeRight() {
+        mCallback.onSwipeRight();
     }
 
     public void onSwipeLeft() {
+        mCallback.onSwipeLeft();
     }
 
     public void onSwipeTop() {
@@ -72,4 +84,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
     public void onSwipeBottom() {
     }
+
+
 }
