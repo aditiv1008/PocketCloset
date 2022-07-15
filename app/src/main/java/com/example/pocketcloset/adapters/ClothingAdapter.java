@@ -18,8 +18,8 @@ import com.parse.ParseFile;
 import java.util.List;
 
 public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.ViewHolder> {
-    private Context context;
-    private List<Clothing> clothes;
+    private final Context context;
+    private final List<Clothing> clothes;
 
     public ClothingAdapter(Context context, List<Clothing> clothes) {
         this.context = context;
@@ -59,7 +59,7 @@ public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView ivWardrobePhoto;
+        private final ImageView ivWardrobePhoto;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

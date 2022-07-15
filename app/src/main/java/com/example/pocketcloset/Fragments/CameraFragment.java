@@ -46,7 +46,7 @@ public class CameraFragment extends Fragment {
     private ImageButton ibCamera;
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     private File photoFile;
-    private String photoFileName = "photo.jpg";
+    private final String photoFileName = "photo.jpg";
 
 
     // TODO: Rename parameter arguments, choose names that match

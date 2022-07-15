@@ -2,30 +2,21 @@ package com.example.pocketcloset.Fragments;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.example.pocketcloset.R;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import java.io.File;
 
 
 public class BaseFragment extends Fragment {
-    public static final String TAG ="BaseFragment";
+    public static final String TAG = "BaseFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public File photoFile;
     public String photoFileName = "photo.jpg";
-
 
 
     void launchCamera() {
@@ -46,15 +37,11 @@ public class BaseFragment extends Fragment {
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
 
-
-            if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-                Log.i("Base fragment", getContext().getPackageManager().toString());
-                // Start the image capture intent to take photo
-                Log.i("BASE FRAGMENT", "I AM LAUNCHING CAMERA");
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-
-                Log.i("BASE FRAGMENT", "I AM NOT LAUNCHING CAMERA");
-
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+            Log.i("Base fragment", getContext().getPackageManager().toString());
+            // Start the image capture intent to take photo
+            Log.i("BASE FRAGMENT", "I AM LAUNCHING CAMERA");
+            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
 
@@ -65,7 +52,7 @@ public class BaseFragment extends Fragment {
         File mediaStorageDir = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "APP_TAG");
 
         // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
             Log.d("APP_TAG", "failed to create directory");
         }
 

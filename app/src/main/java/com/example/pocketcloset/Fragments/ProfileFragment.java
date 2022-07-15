@@ -71,7 +71,7 @@ public class ProfileFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
-        tvUsername = (TextView) view.findViewById(R.id.tvUsername3);
+        tvUsername = view.findViewById(R.id.tvUsername3);
 
 
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
