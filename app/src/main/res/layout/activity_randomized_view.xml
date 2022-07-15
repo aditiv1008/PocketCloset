@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".RandomizedView">
 
+
+
     <ImageView
         android:id="@+id/ivTop"
         android:layout_width="120dp"
@@ -102,5 +104,78 @@
         app:layout_constraintStart_toStartOf="@+id/ivTop"
         app:layout_constraintTop_toTopOf="@+id/ivTop" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomBottoms"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivBottom"
+        app:layout_constraintTop_toTopOf="@+id/ivBottom" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomHeadwear"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivHeadwear"
+        app:layout_constraintTop_toTopOf="@+id/ivHeadwear" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomShoes"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="132dp"
+        app:layout_constraintStart_toStartOf="@+id/ivBottom"
+        app:layout_constraintTop_toTopOf="@+id/ivBottom" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomOverwear"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivOverwear"
+        app:layout_constraintTop_toTopOf="@+id/ivOverwear" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomHandheld"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivHandheld"
+        app:layout_constraintTop_toTopOf="@+id/ivHandheld" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomBracelet"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivBracelet"
+        app:layout_constraintTop_toTopOf="@+id/ivBracelet" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomNecklace"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivNecklace"
+        app:layout_constraintTop_toTopOf="@+id/ivNecklace" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRandomEarrings"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="@+id/ivEarrings"
+        app:layout_constraintTop_toTopOf="@+id/ivEarrings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

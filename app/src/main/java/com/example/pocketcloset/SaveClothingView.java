@@ -186,7 +186,7 @@ public class SaveClothingView extends AppCompatActivity {
 
             }
         });
-        Log.i("SaveClothingView", "Clothing:" + article.getClothingType().toString());
+        Log.i("SaveClothingView", "Clothing:" + article.getClothingType());
 
         Log.i("SaveClothingView", "Top Button Clicked");
 

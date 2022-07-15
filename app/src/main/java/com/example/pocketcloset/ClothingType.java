@@ -12,4 +12,5 @@ public class ClothingType {
     public static final String SKIRT = "Skirt";
     public static final String BRACELET = "Bracelet";
     public static final String HANDHELD = "Handheld";
+
 }

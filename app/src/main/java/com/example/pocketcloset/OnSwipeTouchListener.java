@@ -10,8 +10,8 @@ import android.view.View.OnTouchListener;
 public class OnSwipeTouchListener implements OnTouchListener {
 
     public interface Callback {
-        public void onSwipeRight();
-        public void onSwipeLeft();
+        void onSwipeRight();
+        void onSwipeLeft();
     }
 
     private final Callback mCallback;

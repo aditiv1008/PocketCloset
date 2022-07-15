@@ -7,12 +7,13 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.example.pocketcloset.adapters.ClothingAdapter;
-import com.example.pocketcloset.adapters.RandomizedAdapter;
 import com.example.pocketcloset.models.Clothing;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -26,6 +27,15 @@ import java.util.Random;
 
 public class RandomizedView extends AppCompatActivity {
     protected List<Clothing> allClothing;
+    List<Clothing> randomTops;
+    List<Clothing> randomBottoms;
+    List<Clothing> randomHeadwear;
+    List<Clothing> randomOverwear;
+    List<Clothing> randomHandheld;
+    List<Clothing> randomNeckwear;
+    List<Clothing> randomEarrings;
+    List<Clothing> randomShoes;
+    List<Clothing> randomBracelets;
     private ImageView ivShoes;
     private ImageView ivTop;
     private ImageView ivBottom;
@@ -36,8 +46,29 @@ public class RandomizedView extends AppCompatActivity {
     private ImageView ivEarrings;
     private ImageView ivOverwear;
     private ClothingAdapter adapter;
-    private RandomizedAdapter randomizedAdapter;
+    private ClothingAdapter topsAdapter;
+    private ClothingAdapter bottomsAdapter;
+    private ClothingAdapter headwearAdapter;
+    private ClothingAdapter shoesAdapter;
+    private ClothingAdapter earringsAdapter;
+    private ClothingAdapter overwearAdapter;
+    private ClothingAdapter neckwearAdapter;
+    private ClothingAdapter braceletAdapter;
+    private ClothingAdapter handheldAdapter;
     private RecyclerView rvRandomTops;
+    private RecyclerView rvRandomShoes;
+    private RecyclerView rvRandomHandheld;
+    private RecyclerView rvRandomEarrings;
+    private RecyclerView rvRandomNeckwear;
+    private RecyclerView rvRandomOverwear;
+    private RecyclerView rvRandomBottoms;
+    private RecyclerView rvRandomHeadwear;
+    private RecyclerView rvRandomBracelet;
+    private SnapHelper topSnapHelper;
+    private SnapHelper bottomsSnapHelper;
+    private SnapHelper overwearSnapHelper;
+    private SnapHelper shoesSnapHelper;
+    private SnapHelper handheldSnapHelper;
 
 
     @Override
@@ -56,17 +87,63 @@ public class RandomizedView extends AppCompatActivity {
         ivOverwear = findViewById(R.id.ivOverwear);
         ivEarrings = findViewById(R.id.ivEarrings);
         rvRandomTops = findViewById(R.id.rvRandomTops);
-        randomizedAdapter = new RandomizedAdapter(this, allClothing);
-
-
-        adapter = new ClothingAdapter(this, allClothing);
-        rvRandomTops.setAdapter(randomizedAdapter);
+        rvRandomBottoms = findViewById(R.id.rvRandomBottoms);
+        rvRandomEarrings = findViewById(R.id.rvRandomEarrings);
+        rvRandomShoes = findViewById(R.id.rvRandomShoes);
+        rvRandomNeckwear = findViewById(R.id.rvRandomNecklace);
+        rvRandomOverwear = findViewById(R.id.rvRandomOverwear);
+        rvRandomEarrings = findViewById(R.id.rvRandomEarrings);
+        rvRandomBracelet = findViewById(R.id.rvRandomBracelet);
+        randomTops = new ArrayList<>();
+        rvRandomHeadwear = findViewById(R.id.rvRandomHeadwear);
+        topsAdapter = new ClothingAdapter(this, randomTops);
+        randomBottoms = new ArrayList<>();
+        randomHeadwear = new ArrayList<>();
+        randomEarrings = new ArrayList<>();
+        randomOverwear = new ArrayList<>();
+        randomHandheld = new ArrayList<>();
+        randomNeckwear = new ArrayList<>();
+        randomShoes = new ArrayList<>();
+        randomBracelets = new ArrayList<>();
+        bottomsAdapter = new ClothingAdapter(this, randomBottoms);
+        headwearAdapter = new ClothingAdapter(this, randomHeadwear);
+        shoesAdapter = new ClothingAdapter(this, randomShoes);
+        overwearAdapter = new ClothingAdapter(this, randomOverwear);
+        neckwearAdapter = new ClothingAdapter(this, randomNeckwear);
+        earringsAdapter = new ClothingAdapter(this, randomEarrings);
+        braceletAdapter = new ClothingAdapter(this, randomBracelets);
+        earringsAdapter = new ClothingAdapter(this, randomEarrings);
+        rvRandomTops.setAdapter(topsAdapter);
         rvRandomTops.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        queryClothes(null);
-        queryClothesRandom(ClothingType.TOP);
-
-
-
+        rvRandomHeadwear.setAdapter(headwearAdapter);
+        rvRandomHeadwear.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomShoes.setAdapter(shoesAdapter);
+        rvRandomShoes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomOverwear.setAdapter(overwearAdapter);
+        rvRandomOverwear.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomNeckwear.setAdapter(neckwearAdapter);
+        rvRandomNeckwear.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomEarrings.setAdapter(earringsAdapter);
+        rvRandomEarrings.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomBracelet.setAdapter(braceletAdapter);
+        rvRandomBracelet.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        queryClothesRandom(ClothingType.HEADWEAR, headwearAdapter, randomHeadwear);
+        queryClothesRandom(ClothingType.BRACELET, braceletAdapter, randomBracelets);
+        queryClothesRandom(ClothingType.EARRINGS, earringsAdapter, randomEarrings);
+        queryClothesRandom(ClothingType.OVERWEAR, overwearAdapter, randomOverwear);
+        queryClothesRandom(ClothingType.NECKWEAR, neckwearAdapter, randomNeckwear);
+        queryClothesRandom(ClothingType.SHOES, shoesAdapter, randomShoes);
+        queryClothesRandom(ClothingType.TOP, topsAdapter, randomTops);
+        rvRandomBottoms.setAdapter(bottomsAdapter);
+        rvRandomBottoms.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        queryClothesRandom(ClothingType.PANTS, bottomsAdapter, randomBottoms);
+        queryClothesRandom(ClothingType.DRESS, bottomsAdapter, randomBottoms);
+        topSnapHelper = new PagerSnapHelper();
+        topSnapHelper.attachToRecyclerView(rvRandomTops);
+        bottomsSnapHelper = new PagerSnapHelper();
+        bottomsSnapHelper.attachToRecyclerView(rvRandomBottoms);
+        shoesSnapHelper = new PagerSnapHelper();
+        shoesSnapHelper.attachToRecyclerView(rvRandomShoes);
 
 
     }
@@ -103,14 +180,14 @@ public class RandomizedView extends AppCompatActivity {
         }
     }
 
-    protected void queryRandom(){
+    protected void queryRandom() {
         adapter.clear();
         allClothing.addAll(filterClothing(allClothing, ClothingType.TOP));
         adapter.notifyDataSetChanged();
 
     }
 
-    protected  void queryClothesRandom(@Nullable String clothingType){
+    protected void queryClothesRandom(@Nullable String clothingType, ClothingAdapter adapter, List<Clothing> clothingList) {
         {
             // specify what type of data we want to query - Post.class
             ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
@@ -125,6 +202,8 @@ public class RandomizedView extends AppCompatActivity {
             query.setLimit(20);
             // order posts by creation date (newest first)
             query.addDescendingOrder("createdAt");
+
+
             // start an asynchronous call for posts
             query.findInBackground(new FindCallback<Clothing>() {
                 @Override
@@ -134,19 +213,10 @@ public class RandomizedView extends AppCompatActivity {
                         Log.i("RANDOMIZED VIEW", "Issue with getting clothing", e);
                         return;
                     }
-                    randomizedAdapter.clear();
-                    allClothing.addAll(clothes);
-                    randomizedAdapter.notifyDataSetChanged();
-
-
+                    clothingList.addAll(clothes);
+                    adapter.notifyDataSetChanged();
                 }
             });
-
-
-
-
-
-
         }
     }
 
@@ -183,22 +253,13 @@ public class RandomizedView extends AppCompatActivity {
                 checkClothing(allClothing, ClothingType.PANTS, ivBottom);
                 checkClothing(allClothing, ClothingType.DRESS, ivBottom);
                 checkClothing(allClothing, ClothingType.SKIRT, ivBottom);
-             //   checkClothing(allClothing, ClothingType.TOP, ivTop);
+                checkClothing(allClothing, ClothingType.TOP, ivTop);
                 checkClothing(allClothing, ClothingType.NECKWEAR, ivNecklace);
                 checkClothing(allClothing, ClothingType.SHOES, ivShoes);
                 checkClothing(allClothing, ClothingType.HANDHELD, ivHandheld);
                 checkClothing(allClothing, ClothingType.EARRINGS, ivEarrings);
                 checkClothing(allClothing, ClothingType.OVERWEAR, ivOverwear);
-
-
             }
         });
-
-
-
-
-
-
     }
-
 }
