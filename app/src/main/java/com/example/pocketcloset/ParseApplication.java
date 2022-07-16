@@ -3,6 +3,7 @@ package com.example.pocketcloset;
 import android.app.Application;
 
 import com.example.pocketcloset.models.Clothing;
+import com.example.pocketcloset.models.Outfit;
 import com.example.pocketcloset.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -15,6 +16,7 @@ public class ParseApplication extends Application {
 
         ParseObject.registerSubclass(Clothing.class);
         ParseObject.registerSubclass(User.class);
+        ParseObject.registerSubclass(Outfit.class);
 
 
         Parse.initialize(new Parse.Configuration.Builder(this)
