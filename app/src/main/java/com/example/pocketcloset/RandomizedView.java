@@ -1,8 +1,15 @@
 package com.example.pocketcloset;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +22,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.example.pocketcloset.adapters.ClothingAdapter;
 import com.example.pocketcloset.models.Clothing;
+import com.example.pocketcloset.models.Outfit;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +78,7 @@ public class RandomizedView extends AppCompatActivity {
     private SnapHelper overwearSnapHelper;
     private SnapHelper shoesSnapHelper;
     private SnapHelper handheldSnapHelper;
+    private ImageButton ibAdd;
 
 
     @Override
@@ -94,6 +104,7 @@ public class RandomizedView extends AppCompatActivity {
         rvRandomOverwear = findViewById(R.id.rvRandomOverwear);
         rvRandomEarrings = findViewById(R.id.rvRandomEarrings);
         rvRandomBracelet = findViewById(R.id.rvRandomBracelet);
+        ibAdd = findViewById(R.id.ibAdd);
         randomTops = new ArrayList<>();
         rvRandomHeadwear = findViewById(R.id.rvRandomHeadwear);
         topsAdapter = new ClothingAdapter(this, randomTops);
@@ -146,7 +157,100 @@ public class RandomizedView extends AppCompatActivity {
         shoesSnapHelper.attachToRecyclerView(rvRandomShoes);
 
 
+
+
+        ibAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              showAddItemDialog(RandomizedView.this);
+                }
+        });
+
+
     }
+
+    private void showAddItemDialog(Context context) {
+        final EditText taskEditText = new EditText(context);
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle("Create Outfit")
+                .setMessage("Create a name for your new outfit")
+                .setView(taskEditText)
+                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Outfit outfit = new Outfit();
+                        Clothing top =  getClothing(rvRandomTops, randomTops);
+                        Clothing bottom =  getClothing(rvRandomBottoms, randomBottoms);
+                        Clothing handheld = getClothing(rvRandomHandheld, randomHandheld);
+                        Clothing earrings =  getClothing(rvRandomEarrings, randomEarrings);
+                        Clothing bracelet =  getClothing(rvRandomBracelet, randomBracelets);
+                        Clothing headwear = getClothing(rvRandomHeadwear, randomHeadwear);
+                        Clothing overwear = getClothing(rvRandomOverwear, randomOverwear);
+                        Clothing shoes = getClothing(rvRandomShoes, randomShoes);
+                        Clothing neckwear = getClothing(rvRandomNeckwear, randomNeckwear);
+                        outfit.setOutfitName(String.valueOf(taskEditText.getText()));
+                        outfit.setUser(ParseUser.getCurrentUser());
+
+                        if (bottom != null) {
+                            outfit.setBottoms(bottom);
+                        }
+                        if (top != null) {
+                            outfit.setTop(top);
+                        }
+                        if (shoes != null) {
+                            outfit.setShoes(shoes);
+                        }
+                        if (headwear != null) {
+                            outfit.setHeadwear(headwear);
+                        }
+                        if (handheld != null){
+                        outfit.setHandheld(handheld);
+                    }
+                         if (earrings != null)
+                      {
+                        outfit.setEarrings(earrings);
+                      }
+                         if(bracelet != null) {
+                             outfit.setBracelet(bracelet);
+                         }
+                        if(overwear != null) {
+                            outfit.setOverwear(overwear);
+                        }
+                        if(neckwear != null) {
+                            outfit.setNeckwear(neckwear);
+                        }
+                        outfit.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null) {
+                                    Log.e("RANDOMIZED VIEW", "Error while saving", e);
+                                    Toast.makeText(RandomizedView.this, "Error while saving", Toast.LENGTH_SHORT);
+                                }
+
+                                Log.i("RANDOMIZED VIEW", "SUCCESS");
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .create();
+        dialog.show();
+    }
+
+
+
+    public Clothing getClothing(RecyclerView rvClothing, List<Clothing> randomClothing) {
+        Integer position = 0;
+        if(rvClothing != null) {
+             position = ((LinearLayoutManager) rvClothing.getLayoutManager()).findFirstVisibleItemPosition();
+        }
+        if(randomClothing.size()!= 0) {
+            return randomClothing.get(position);
+        }
+        return null;
+    }
+
+
 
     public Clothing randomizeClothing(List<Clothing> allClothing, String clothing) {
         List<Clothing> newClothing = filterClothing(allClothing, clothing);
