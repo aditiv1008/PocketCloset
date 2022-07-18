@@ -13,10 +13,10 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        ParseObject.registerSubclass(Outfit.class);
         ParseObject.registerSubclass(Clothing.class);
         ParseObject.registerSubclass(User.class);
-        ParseObject.registerSubclass(Outfit.class);
+
 
 
         Parse.initialize(new Parse.Configuration.Builder(this)

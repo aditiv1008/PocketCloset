@@ -14,6 +14,7 @@ public class Clothing extends ParseObject {
     public static final String KEY_CLOTHING_TYPE = "clothingType";
     public static final String KEY_CLOTHING_IMAGE = "clothingPhoto";
     public static final String KEY_USER = "user";
+    public static final String KEY_WORN_COUNT = "wornCount";
 
     public String getClothingType() {
         return getString(KEY_CLOTHING_TYPE);
@@ -37,6 +38,14 @@ public class Clothing extends ParseObject {
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
+    }
+
+    public Integer getWornCount() {
+        return getInt(KEY_WORN_COUNT);
+    }
+
+    public void setWornCount(Integer count) {
+        put(KEY_WORN_COUNT, count);
     }
 
 

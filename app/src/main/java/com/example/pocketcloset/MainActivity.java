@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ProfileFragment profileFragment = new ProfileFragment();
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment.setArguments(bundl);
                         break;
                     case R.id.action_outfits:
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("userToFilterBy", ParseUser.getCurrentUser());
                         fragment = outfitsFragment;
+                        fragment.setArguments(bundle);
                         break;
                     case R.id.action_profile:
                     default:
