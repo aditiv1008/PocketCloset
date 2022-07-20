@@ -21,13 +21,13 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.27441253662109377" />
         <entry key="app/src/main/res/layout/fragment_wardrobe.xml" value="0.294097900390625" />
         <entry key="app/src/main/res/layout/fragment_wardrobe_bottoms.xml" value="0.20416666666666666" />
-        <entry key="app/src/main/res/layout/item_outfit_card.xml" value="0.3159851301115242" />
+        <entry key="app/src/main/res/layout/item_outfit_card.xml" value="0.6525344848632812" />
         <entry key="app/src/main/res/layout/item_randomized_bottom.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/item_randomized_clothing.xml" value="0.242938232421875" />
         <entry key="app/src/main/res/layout/item_save_clothing.xml" value="0.3471038818359375" />
         <entry key="app/src/main/res/layout/item_wardrobe_clothing.xml" value="0.18703703703703703" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.22962962962962963" />
-        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2530426025390625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.1" />
       </map>

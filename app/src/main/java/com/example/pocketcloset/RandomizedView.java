@@ -1,18 +1,21 @@
 package com.example.pocketcloset;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+import com.example.pocketcloset.Fragments.OutfitsFragment;
 import com.example.pocketcloset.adapters.ClothingAdapter;
 import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
@@ -45,6 +49,7 @@ public class RandomizedView extends AppCompatActivity {
     List<Clothing> randomEarrings;
     List<Clothing> randomShoes;
     List<Clothing> randomBracelets;
+    FragmentManager fragmentManager;
     private ImageView ivShoes;
     private ImageView ivTop;
     private ImageView ivBottom;
@@ -96,11 +101,13 @@ public class RandomizedView extends AppCompatActivity {
         ivNecklace = findViewById(R.id.ivNecklace);
         ivOverwear = findViewById(R.id.ivOverwear);
         ivEarrings = findViewById(R.id.ivEarrings);
+        fragmentManager = getSupportFragmentManager();
         rvRandomTops = findViewById(R.id.rvRandomTops);
         rvRandomBottoms = findViewById(R.id.rvRandomBottoms);
         rvRandomEarrings = findViewById(R.id.rvRandomEarrings);
         rvRandomShoes = findViewById(R.id.rvRandomShoes);
         rvRandomNeckwear = findViewById(R.id.rvRandomNecklace);
+        rvRandomHandheld = findViewById(R.id.rvRandomHandheld);
         rvRandomOverwear = findViewById(R.id.rvRandomOverwear);
         rvRandomEarrings = findViewById(R.id.rvRandomEarrings);
         rvRandomBracelet = findViewById(R.id.rvRandomBracelet);
@@ -122,6 +129,7 @@ public class RandomizedView extends AppCompatActivity {
         overwearAdapter = new ClothingAdapter(this, randomOverwear);
         neckwearAdapter = new ClothingAdapter(this, randomNeckwear);
         earringsAdapter = new ClothingAdapter(this, randomEarrings);
+        handheldAdapter = new ClothingAdapter(this, randomHandheld);
         braceletAdapter = new ClothingAdapter(this, randomBracelets);
         earringsAdapter = new ClothingAdapter(this, randomEarrings);
         rvRandomTops.setAdapter(topsAdapter);
@@ -136,6 +144,8 @@ public class RandomizedView extends AppCompatActivity {
         rvRandomNeckwear.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvRandomEarrings.setAdapter(earringsAdapter);
         rvRandomEarrings.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rvRandomHandheld.setAdapter(handheldAdapter);
+        rvRandomHandheld.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvRandomBracelet.setAdapter(braceletAdapter);
         rvRandomBracelet.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         queryClothesRandom(ClothingType.HEADWEAR, headwearAdapter, randomHeadwear);
@@ -143,6 +153,7 @@ public class RandomizedView extends AppCompatActivity {
         queryClothesRandom(ClothingType.EARRINGS, earringsAdapter, randomEarrings);
         queryClothesRandom(ClothingType.OVERWEAR, overwearAdapter, randomOverwear);
         queryClothesRandom(ClothingType.NECKWEAR, neckwearAdapter, randomNeckwear);
+        queryClothesRandom(ClothingType.HANDHELD, handheldAdapter, randomHandheld);
         queryClothesRandom(ClothingType.SHOES, shoesAdapter, randomShoes);
         queryClothesRandom(ClothingType.TOP, topsAdapter, randomTops);
         rvRandomBottoms.setAdapter(bottomsAdapter);
@@ -157,17 +168,17 @@ public class RandomizedView extends AppCompatActivity {
         shoesSnapHelper.attachToRecyclerView(rvRandomShoes);
 
 
-
-
         ibAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              showAddItemDialog(RandomizedView.this);
-                }
+                showAddItemDialog(RandomizedView.this);
+            }
         });
 
 
     }
+
+
 
     private void showAddItemDialog(Context context) {
         final EditText taskEditText = new EditText(context);
@@ -179,11 +190,11 @@ public class RandomizedView extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Outfit outfit = new Outfit();
-                        Clothing top =  getClothing(rvRandomTops, randomTops);
-                        Clothing bottom =  getClothing(rvRandomBottoms, randomBottoms);
+                        Clothing top = getClothing(rvRandomTops, randomTops);
+                        Clothing bottom = getClothing(rvRandomBottoms, randomBottoms);
                         Clothing handheld = getClothing(rvRandomHandheld, randomHandheld);
-                        Clothing earrings =  getClothing(rvRandomEarrings, randomEarrings);
-                        Clothing bracelet =  getClothing(rvRandomBracelet, randomBracelets);
+                        Clothing earrings = getClothing(rvRandomEarrings, randomEarrings);
+                        Clothing bracelet = getClothing(rvRandomBracelet, randomBracelets);
                         Clothing headwear = getClothing(rvRandomHeadwear, randomHeadwear);
                         Clothing overwear = getClothing(rvRandomOverwear, randomOverwear);
                         Clothing shoes = getClothing(rvRandomShoes, randomShoes);
@@ -193,31 +204,39 @@ public class RandomizedView extends AppCompatActivity {
 
                         if (bottom != null) {
                             outfit.setBottoms(bottom);
+                            bottom.setWornCount(bottom.getWornCount()+1);
                         }
                         if (top != null) {
                             outfit.setTop(top);
+                            top.setWornCount(top.getWornCount()+1);
                         }
                         if (shoes != null) {
                             outfit.setShoes(shoes);
+                            shoes.setWornCount(shoes.getWornCount()+1);
                         }
                         if (headwear != null) {
                             outfit.setHeadwear(headwear);
+                            headwear.setWornCount(headwear.getWornCount()+1);
                         }
-                        if (handheld != null){
-                        outfit.setHandheld(handheld);
-                    }
-                         if (earrings != null)
-                      {
-                        outfit.setEarrings(earrings);
-                      }
-                         if(bracelet != null) {
-                             outfit.setBracelet(bracelet);
-                         }
-                        if(overwear != null) {
+                        if (handheld != null) {
+                            outfit.setHandheld(handheld);
+                            handheld.setWornCount(handheld.getWornCount()+1);
+                        }
+                        if (earrings != null) {
+                            outfit.setEarrings(earrings);
+                            earrings.setWornCount(earrings.getWornCount()+1);
+                        }
+                        if (bracelet != null) {
+                            outfit.setBracelet(bracelet);
+                            bracelet.setWornCount(bracelet.getWornCount()+1);
+                        }
+                        if (overwear != null) {
                             outfit.setOverwear(overwear);
+                            overwear.setWornCount(overwear.getWornCount()+1);
                         }
-                        if(neckwear != null) {
+                        if (neckwear != null) {
                             outfit.setNeckwear(neckwear);
+                            neckwear.setWornCount(neckwear.getWornCount()+1);
                         }
                         outfit.saveInBackground(new SaveCallback() {
                             @Override
@@ -230,6 +249,8 @@ public class RandomizedView extends AppCompatActivity {
                                 Log.i("RANDOMIZED VIEW", "SUCCESS");
                             }
                         });
+
+
                     }
                 })
                 .setNegativeButton("Cancel", null)
@@ -238,18 +259,16 @@ public class RandomizedView extends AppCompatActivity {
     }
 
 
-
     public Clothing getClothing(RecyclerView rvClothing, List<Clothing> randomClothing) {
         Integer position = 0;
-        if(rvClothing != null) {
-             position = ((LinearLayoutManager) rvClothing.getLayoutManager()).findFirstVisibleItemPosition();
+        if (rvClothing != null) {
+            position = ((LinearLayoutManager) rvClothing.getLayoutManager()).findFirstVisibleItemPosition();
         }
-        if(randomClothing.size()!= 0) {
+        if (randomClothing.size() != 0) {
             return randomClothing.get(position);
         }
         return null;
     }
-
 
 
     public Clothing randomizeClothing(List<Clothing> allClothing, String clothing) {
@@ -284,12 +303,6 @@ public class RandomizedView extends AppCompatActivity {
         }
     }
 
-    protected void queryRandom() {
-        adapter.clear();
-        allClothing.addAll(filterClothing(allClothing, ClothingType.TOP));
-        adapter.notifyDataSetChanged();
-
-    }
 
     protected void queryClothesRandom(@Nullable String clothingType, ClothingAdapter adapter, List<Clothing> clothingList) {
         {
