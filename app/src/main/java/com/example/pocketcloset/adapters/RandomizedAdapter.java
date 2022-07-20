@@ -17,24 +17,24 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.ViewHolder> {
+public class RandomizedAdapter extends RecyclerView.Adapter<RandomizedAdapter.ViewHolder> {
     private final Context context;
     private final List<Clothing> clothes;
 
-    public ClothingAdapter(Context context, List<Clothing> clothes) {
+    public RandomizedAdapter(Context context, List<Clothing> clothes) {
         this.context = context;
         this.clothes = clothes;
     }
 
     @NonNull
     @Override
-    public ClothingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_wardrobe_clothing, parent, false);
+    public RandomizedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_randomized_clothing, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClothingAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RandomizedAdapter.ViewHolder holder, int position) {
         Clothing clothing = clothes.get(position);
         holder.bind(clothing);
     }
