@@ -7,21 +7,23 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/text_format.xml" value="0.2565" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.2565" />
+        <entry key="app/src/main/res/drawable/ic_expand_less.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_expand_more.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_tint_selector.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.15812530517578122" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24815826416015632" />
-        <entry key="app/src/main/res/layout/activity_randomized_view.xml" value="0.22012786865234374" />
+        <entry key="app/src/main/res/layout/activity_randomized_view.xml" value="0.3469024658203125" />
         <entry key="app/src/main/res/layout/activity_save_clothing_view.xml" value="0.21856689453125" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/fragment.xml" value="0.275" />
         <entry key="app/src/main/res/layout/fragment_base.xml" value="0.16574074074074074" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.23796296296296296" />
         <entry key="app/src/main/res/layout/fragment_outfits.xml" value="0.30225044533058454" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.27441253662109377" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3268112182617187" />
         <entry key="app/src/main/res/layout/fragment_wardrobe.xml" value="0.294097900390625" />
         <entry key="app/src/main/res/layout/fragment_wardrobe_bottoms.xml" value="0.20416666666666666" />
-        <entry key="app/src/main/res/layout/item_outfit_card.xml" value="0.6525344848632812" />
+        <entry key="app/src/main/res/layout/item_outfit_card.xml" value="0.30388336181640624" />
         <entry key="app/src/main/res/layout/item_randomized_bottom.xml" value="0.18541666666666667" />
         <entry key="app/src/main/res/layout/item_randomized_clothing.xml" value="0.242938232421875" />
         <entry key="app/src/main/res/layout/item_save_clothing.xml" value="0.3471038818359375" />

@@ -119,18 +119,22 @@ public class CameraFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SaveClothingView.class);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 20, stream);
-                byte[] bitmapBytes = stream.toByteArray();
-                ParseFile image = new ParseFile("clothingPhoto", bitmapBytes);
-                try {
-                    image.save();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                intent.putExtra(SaveClothingView.EXTRA_CONTACT, image);
-                getContext().startActivity(intent);
+                if (bitmap != null) {
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 20, stream);
+                    byte[] bitmapBytes = stream.toByteArray();
+                    ParseFile image = new ParseFile("clothingPhoto", bitmapBytes);
+
+                    try {
+                        image.save();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    intent.putExtra(SaveClothingView.EXTRA_CONTACT, image);
+                    getContext().startActivity(intent);
 
                 }
+            }
         });
 
     }

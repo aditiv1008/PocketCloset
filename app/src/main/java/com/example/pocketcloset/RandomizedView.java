@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.example.pocketcloset.Fragments.OutfitsFragment;
-import com.example.pocketcloset.adapters.ClothingAdapter;
+import com.example.pocketcloset.adapters.RandomizedAdapter;
 import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
 import com.parse.FindCallback;
@@ -35,6 +35,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -59,16 +60,16 @@ public class RandomizedView extends AppCompatActivity {
     private ImageView ivHandheld;
     private ImageView ivEarrings;
     private ImageView ivOverwear;
-    private ClothingAdapter adapter;
-    private ClothingAdapter topsAdapter;
-    private ClothingAdapter bottomsAdapter;
-    private ClothingAdapter headwearAdapter;
-    private ClothingAdapter shoesAdapter;
-    private ClothingAdapter earringsAdapter;
-    private ClothingAdapter overwearAdapter;
-    private ClothingAdapter neckwearAdapter;
-    private ClothingAdapter braceletAdapter;
-    private ClothingAdapter handheldAdapter;
+    RandomizedAdapter adapter;
+    RandomizedAdapter topsAdapter;
+    RandomizedAdapter bottomsAdapter;
+    RandomizedAdapter headwearAdapter;
+    RandomizedAdapter shoesAdapter;
+    RandomizedAdapter earringsAdapter;
+    RandomizedAdapter overwearAdapter;
+    RandomizedAdapter neckwearAdapter;
+    RandomizedAdapter braceletAdapter;
+    RandomizedAdapter handheldAdapter;
     private RecyclerView rvRandomTops;
     private RecyclerView rvRandomShoes;
     private RecyclerView rvRandomHandheld;
@@ -114,7 +115,7 @@ public class RandomizedView extends AppCompatActivity {
         ibAdd = findViewById(R.id.ibAdd);
         randomTops = new ArrayList<>();
         rvRandomHeadwear = findViewById(R.id.rvRandomHeadwear);
-        topsAdapter = new ClothingAdapter(this, randomTops);
+        topsAdapter = new RandomizedAdapter(this, randomTops);
         randomBottoms = new ArrayList<>();
         randomHeadwear = new ArrayList<>();
         randomEarrings = new ArrayList<>();
@@ -123,15 +124,15 @@ public class RandomizedView extends AppCompatActivity {
         randomNeckwear = new ArrayList<>();
         randomShoes = new ArrayList<>();
         randomBracelets = new ArrayList<>();
-        bottomsAdapter = new ClothingAdapter(this, randomBottoms);
-        headwearAdapter = new ClothingAdapter(this, randomHeadwear);
-        shoesAdapter = new ClothingAdapter(this, randomShoes);
-        overwearAdapter = new ClothingAdapter(this, randomOverwear);
-        neckwearAdapter = new ClothingAdapter(this, randomNeckwear);
-        earringsAdapter = new ClothingAdapter(this, randomEarrings);
-        handheldAdapter = new ClothingAdapter(this, randomHandheld);
-        braceletAdapter = new ClothingAdapter(this, randomBracelets);
-        earringsAdapter = new ClothingAdapter(this, randomEarrings);
+        bottomsAdapter = new RandomizedAdapter(this, randomBottoms);
+        headwearAdapter = new RandomizedAdapter(this, randomHeadwear);
+        shoesAdapter = new RandomizedAdapter(this, randomShoes);
+        overwearAdapter = new RandomizedAdapter(this, randomOverwear);
+        neckwearAdapter = new RandomizedAdapter(this, randomNeckwear);
+        earringsAdapter = new RandomizedAdapter(this, randomEarrings);
+        handheldAdapter = new RandomizedAdapter(this, randomHandheld);
+        braceletAdapter = new RandomizedAdapter(this, randomBracelets);
+        earringsAdapter = new RandomizedAdapter(this, randomEarrings);
         rvRandomTops.setAdapter(topsAdapter);
         rvRandomTops.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvRandomHeadwear.setAdapter(headwearAdapter);
@@ -304,7 +305,7 @@ public class RandomizedView extends AppCompatActivity {
     }
 
 
-    protected void queryClothesRandom(@Nullable String clothingType, ClothingAdapter adapter, List<Clothing> clothingList) {
+    protected void queryClothesRandom(@Nullable String clothingType,RandomizedAdapter adapter, List<Clothing> clothingList) {
         {
             // specify what type of data we want to query - Post.class
             ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
@@ -330,6 +331,7 @@ public class RandomizedView extends AppCompatActivity {
                         Log.i("RANDOMIZED VIEW", "Issue with getting clothing", e);
                         return;
                     }
+                    Collections.shuffle(clothes);
                     clothingList.addAll(clothes);
                     adapter.notifyDataSetChanged();
                 }

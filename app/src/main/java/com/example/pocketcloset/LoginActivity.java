@@ -15,7 +15,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin;
@@ -29,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         if(ParseUser.getCurrentUser() != null) {
             goMainActivity();
             return;
-       }
+        }
 
         btnSignUp = findViewById(R.id.btnSignupIntent);
         etUsername = findViewById(R.id.etUsername);
@@ -77,3 +76,53 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
