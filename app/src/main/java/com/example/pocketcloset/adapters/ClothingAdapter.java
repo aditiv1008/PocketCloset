@@ -1,7 +1,6 @@
 package com.example.pocketcloset.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,14 +68,9 @@ public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.ViewHo
 
         public void bind(Clothing clothing) {
             // Bind the post data to the view elements
-            Log.i("ADAPTER", "IM IN BIND");
-
             ParseFile image = clothing.getClothingImage();
-            Log.i("ADAPTER", image.getUrl());
             if (image != null) {
-                Log.i("ADAPTER", "I am hereeeee");
-                Glide.with(context).load(image.getUrl()).override(ivWardrobePhoto.getWidth(),ivWardrobePhoto.getHeight()).fitCenter().into(ivWardrobePhoto);
-              //  Log.i("ADAPTER", image.getUrl());
+                Glide.with(context).load(image.getUrl()).override(ivWardrobePhoto.getWidth(), ivWardrobePhoto.getHeight()).fitCenter().into(ivWardrobePhoto);
             }
         }
 

@@ -1,14 +1,13 @@
 package com.example.pocketcloset;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -25,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if(ParseUser.getCurrentUser() != null) {
+        if (ParseUser.getCurrentUser() != null) {
             goMainActivity();
             return;
         }
@@ -36,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String username=  etUsername.getText().toString().trim();
+                String username = etUsername.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
                 loginUser(username, password);
@@ -58,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    Log.e("MESSAGE", "Issue with login", e);
                     return;
                 }
                 goMainActivity();

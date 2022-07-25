@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+
 }
 
 android {
@@ -28,10 +29,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+apply plugin: 'com.google.gms.google-services'
 
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
+
 
     implementation 'com.google.android.material:material:1.6.1'
     implementation "androidx.palette:palette:1.0.0"
@@ -43,8 +46,14 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    implementation platform ('com.google.firebase:firebase-bom:30.3.0')
+    implementation 'com.google.firebase:firebase-messaging'
 
     implementation 'org.parceler:parceler-api:1.1.12'
+    implementation "com.github.parse-community.Parse-SDK-Android:fcm:4.0.0"
+    implementation "com.github.parse-community.Parse-SDK-Android:bolts-tasks:1.4.03"
+//    implementation 'com.parse.bolts:bolts-android:1.4.3'
+
     annotationProcessor 'org.parceler:parceler:1.1.12'
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

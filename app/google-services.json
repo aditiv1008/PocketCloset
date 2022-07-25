@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175249669352",
+    "project_id": "pocketcloset-push-notification",
+    "storage_bucket": "pocketcloset-push-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175249669352:android:71266f1ca25ed2ea7d9d5d",
+        "android_client_info": {
+          "package_name": "com.example.pocketcloset"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175249669352-2hno6nmqe78kiqppnpfk8vfu4o8pvboi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaroGuLAYSpje4eVRbczZRm9pdEHznSwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175249669352-2hno6nmqe78kiqppnpfk8vfu4o8pvboi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

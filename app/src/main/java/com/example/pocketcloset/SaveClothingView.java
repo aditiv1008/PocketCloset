@@ -179,16 +179,12 @@ public class SaveClothingView extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
-                    Log.e("MainActivity", "Error while saving", e);
                     Toast.makeText(SaveClothingView.this, "Error while saving", Toast.LENGTH_SHORT);
                 }
                 goMainActivity();
 
             }
         });
-        Log.i("SaveClothingView", "Clothing:" + article.getClothingType());
-
-        Log.i("SaveClothingView", "Top Button Clicked");
 
     }
 

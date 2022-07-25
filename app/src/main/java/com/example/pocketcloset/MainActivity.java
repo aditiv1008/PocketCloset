@@ -1,5 +1,7 @@
 package com.example.pocketcloset;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,7 +16,12 @@ import com.example.pocketcloset.Fragments.OutfitsFragment;
 import com.example.pocketcloset.Fragments.ProfileFragment;
 import com.example.pocketcloset.Fragments.WardrobeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.parse.ParseUser;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     OutfitsFragment outfitsFragment = new OutfitsFragment();
     WardrobeFragment wardrobeFragment = new WardrobeFragment();
     ProfileFragment profileFragment = new ProfileFragment();
-
-
 
 
     @Override
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_profile:
                     default:
                         //  profileFragment.user = (User) ParseUser.getCurrentUser();
+
                         fragment = profileFragment;
                         break;
                 }
@@ -69,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setSelectedItemId(R.id.action_camera);
     }
 
-
     public void onLogoutButton(View view) {
         // forget who's logged in
         ParseUser.logOut();
@@ -80,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 
 }
