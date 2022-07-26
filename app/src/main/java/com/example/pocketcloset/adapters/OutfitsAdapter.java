@@ -16,6 +16,7 @@ import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
 import com.parse.ParseFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OutfitsAdapter extends RecyclerView.Adapter<OutfitsAdapter.ViewHolder> {
@@ -55,6 +56,20 @@ public class OutfitsAdapter extends RecyclerView.Adapter<OutfitsAdapter.ViewHold
     public void addAll(List<Outfit> list) {
         outfits.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        outfits.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Outfit item, int position) {
+        outfits.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public List<Outfit> getData() {
+        return outfits;
     }
 
 

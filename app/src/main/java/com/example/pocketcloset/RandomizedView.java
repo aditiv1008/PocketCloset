@@ -247,7 +247,6 @@ public class RandomizedView extends AppCompatActivity {
                                     Toast.makeText(RandomizedView.this, "Error while saving", Toast.LENGTH_SHORT);
                                 }
 
-                                Log.i("RANDOMIZED VIEW", "SUCCESS");
                             }
                         });
 

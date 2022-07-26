@@ -2,4 +2,7 @@
     <string name="app_name">PocketCloset</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">1204276447093085</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">2c6ee5cc6e70981bf009b541546feb14</string>
 </resources>

@@ -136,7 +136,7 @@ public class ProfileFragment extends BaseFragment {
         hiddenLayout.setVisibility(View.GONE);
 
         allClothing = new ArrayList<>();
-        queryMostWornClothes();
+        query:
         queryLeastWornClothes();
         mostWorn = new ArrayList<>();
         leastWorn = new ArrayList<>();

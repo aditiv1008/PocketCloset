@@ -171,7 +171,7 @@
         android:id="@+id/ibAdd"
         android:layout_width="58dp"
         android:layout_height="55dp"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="588dp"
         android:background="@drawable/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
