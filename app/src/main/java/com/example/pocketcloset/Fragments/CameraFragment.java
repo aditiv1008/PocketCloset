@@ -1,16 +1,13 @@
 package com.example.pocketcloset.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -19,9 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 import com.example.pocketcloset.R;
 import com.example.pocketcloset.SaveClothingView;
+import com.example.pocketcloset.models.User;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 
@@ -36,7 +40,7 @@ import java.io.IOException;
  * Use the {@link CameraFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CameraFragment extends Fragment {
+public class CameraFragment extends BaseFragment {
 
     private static final int GET_FROM_GALLERY = 3;
     private ImageButton ibPhoto;
@@ -44,9 +48,8 @@ public class CameraFragment extends Fragment {
     private ImageButton ibAdd;
     private Bitmap bitmap;
     private ImageButton ibCamera;
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
-    private File photoFile;
-    private final String photoFileName = "photo.jpg";
+    public User user = (User) User.getCurrentUser();
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -114,6 +117,13 @@ public class CameraFragment extends Fragment {
             }
         });
 
+        ibCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCamera();
+            }
+        });
+
         ibAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +165,8 @@ public class CameraFragment extends Fragment {
     }
 
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -174,6 +186,21 @@ public class CameraFragment extends Fragment {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+            }
+        }
+
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // by this point we have the camera photo on disk
+                bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                // RESIZE BITMAP, see section below
+                // Load the taken image into a preview
+                Glide.with(getContext()).load(bitmap).into(ivPostedPhoto);
+                user.setProfilePhoto(new ParseFile(photoFile));
+                user.saveInBackground();
+                // ivprofilePic.setImageBitmap(takenImage);
+            } else { // Result was a failure
+                Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
     }

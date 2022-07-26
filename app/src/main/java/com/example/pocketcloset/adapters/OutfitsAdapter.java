@@ -1,7 +1,6 @@
 package com.example.pocketcloset.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,6 @@ import com.example.pocketcloset.R;
 import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
 import com.parse.ParseFile;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -102,7 +99,7 @@ public class OutfitsAdapter extends RecyclerView.Adapter<OutfitsAdapter.ViewHold
             checkClothing(outfit.getNeckwear(), ivNeckwear);
             checkClothing(outfit.getHandheld(), ivHandheld);
             checkClothing(outfit.getBracelet(), ivBracelet);
-            }
+        }
 
         public void checkClothing(Clothing clothing, ImageView image) {
             ParseFile photo = null;
@@ -113,10 +110,8 @@ public class OutfitsAdapter extends RecyclerView.Adapter<OutfitsAdapter.ViewHold
                 Glide.with(context).load(photo.getUrl()).into(image);
             }
         }
-        }
-
-
-
-
     }
+
+
+}
 

@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="#00FFFFFF"
+        android:tint="#FA7CBB"
         app:layout_constraintStart_toStartOf="@+id/arrow"
         app:layout_constraintTop_toBottomOf="@+id/arrow"
         app:srcCompat="@drawable/ic_expand_more" />
@@ -76,12 +77,12 @@
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="79dp"
-        android:layout_height="78dp"
+        android:layout_width="96dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -95,7 +96,7 @@
         android:layout_marginTop="20dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
@@ -126,6 +127,7 @@
         android:layout_marginStart="227dp"
         android:layout_marginTop="11dp"
         android:backgroundTint="#00FFFFFF"
+        android:tint="#FA7CBB"
         app:layout_constraintStart_toEndOf="@+id/tvMostWorn"
         app:layout_constraintTop_toBottomOf="@+id/divider"
         app:srcCompat="@drawable/ic_expand_more" />
@@ -139,6 +141,51 @@
         android:clipToPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dividerHide2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hiddenLayout2"
+        android:layout_width="393dp"
+        android:layout_height="82dp"
+        android:layout_margin="0dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+
+        <View
+            android:id="@+id/dividerShifted3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/hiddenLayout2"
+            tools:ignore="NotSibling" />
+
+
+        <TextView
+            android:id="@+id/tvClothes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="25dp"
+            android:text="Number of Clothes Owned"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/hiddenLayout2" />
+
+        <TextView
+            android:id="@+id/tvClothesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="145dp"
+            android:text="38"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvClothes"
+            app:layout_constraintStart_toEndOf="@+id/tvClothes"
+            app:layout_constraintTop_toTopOf="@+id/tvClothes" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/hiddenLayout"
@@ -157,6 +204,7 @@
             android:layout_marginStart="227dp"
             android:layout_marginTop="11dp"
             android:backgroundTint="#00FFFFFF"
+            android:tint="#FA7CBB"
             app:layout_constraintStart_toEndOf="@+id/tvLeastWornShifted"
             app:layout_constraintTop_toBottomOf="@+id/dividerShifted"
             app:srcCompat="@drawable/ic_expand_more" />
@@ -184,7 +232,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:layout_marginBottom="-71dp"
+            android:layout_marginBottom="-11dp"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

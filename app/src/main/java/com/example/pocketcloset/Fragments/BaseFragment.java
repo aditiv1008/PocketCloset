@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -26,8 +25,6 @@ public class BaseFragment extends Fragment {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
         photoFile = getPhotoFileUri(photoFileName);
-        Log.i("BASE FRAG", photoFile.toString());
-
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
@@ -38,9 +35,6 @@ public class BaseFragment extends Fragment {
         // So as long as the result is not null, it's safe to use the intent.
 
         if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-            Log.i("Base fragment", getContext().getPackageManager().toString());
-            // Start the image capture intent to take photo
-            Log.i("BASE FRAGMENT", "I AM LAUNCHING CAMERA");
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
     }
@@ -53,7 +47,6 @@ public class BaseFragment extends Fragment {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
-            Log.d("APP_TAG", "failed to create directory");
         }
 
         // Return the file target for the photo based on filename

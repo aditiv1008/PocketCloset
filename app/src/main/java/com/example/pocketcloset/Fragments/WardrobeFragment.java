@@ -3,13 +3,10 @@ package com.example.pocketcloset.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pocketcloset.ClothingType;
-import com.example.pocketcloset.LoginActivity;
-import com.example.pocketcloset.MainActivity;
 import com.example.pocketcloset.R;
 import com.example.pocketcloset.RandomizedView;
 import com.example.pocketcloset.adapters.ClothingAdapter;
@@ -39,9 +34,9 @@ import java.util.List;
 
 public class WardrobeFragment extends Fragment {
 
+    public MaterialButtonToggleGroup toggleButtonBottoms;
     protected ClothingAdapter adapter;
     protected List<Clothing> allClothing;
-
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView rvWardrobe;
     private ParseUser user;
@@ -63,8 +58,6 @@ public class WardrobeFragment extends Fragment {
     private Button btnBracelet;
     private FloatingActionButton btnRandomize;
 
-    public MaterialButtonToggleGroup toggleButtonBottoms;
-
     public WardrobeFragment() {
         // Require d empty public constructor
 
@@ -79,13 +72,12 @@ public class WardrobeFragment extends Fragment {
         bundl.putParcelableArrayList("allClothing", (ArrayList<? extends Parcelable>) allClothing);
 
 
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         user = getArguments().getParcelable("userToFilterBy");
+        user = getArguments().getParcelable("userToFilterBy");
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wardrobe, container, false);
@@ -134,8 +126,8 @@ public class WardrobeFragment extends Fragment {
 
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
-         //Setup refresh listener which triggers new data loading
-       swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        //Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 adapter.clear();
@@ -145,28 +137,27 @@ public class WardrobeFragment extends Fragment {
             }
         });
 
-       swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-               android.R.color.holo_green_light,
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-       btnRandomize.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent i = new Intent(getContext(), RandomizedView.class);
-               startActivity(i);
-           }
-       });
+        btnRandomize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), RandomizedView.class);
+                startActivity(i);
+            }
+        });
 
-       btnTops.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               adapter.clear();
-               queryClothes(ClothingType.TOP);
-               Log.i("Shirt", "" + allClothing.size());
-               adapter.notifyDataSetChanged();
-           }
-       });
+        btnTops.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.clear();
+                queryClothes(ClothingType.TOP);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         btnOverwear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,8 +204,8 @@ public class WardrobeFragment extends Fragment {
                 btnBack.setVisibility(View.VISIBLE);
                 toggleButtonBottoms.setVisibility(View.VISIBLE);
                 adapter.clear();
-               queryClothes(ClothingType.DRESS);
-               queryClothes(ClothingType.PANTS);
+                queryClothes(ClothingType.DRESS);
+                queryClothes(ClothingType.PANTS);
                 queryClothes(ClothingType.SKIRT);
                 adapter.notifyDataSetChanged();
             }
@@ -305,18 +296,17 @@ public class WardrobeFragment extends Fragment {
             }
         });
 
-       queryClothes(null);
+        queryClothes(null);
     }
 
 
-    protected void queryClothes( @Nullable String clothingType) {
+    protected void queryClothes(@Nullable String clothingType) {
         // specify what type of data we want to query - Post.class
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
-        Log.i("WardrobeFragment", "queryClothes(with params) ran");
         query.include(Clothing.KEY_CLOTHING_IMAGE);
         query.whereEqualTo(Clothing.KEY_USER, user);
-        if(clothingType != null) {
+        if (clothingType != null) {
             query.whereEqualTo(Clothing.KEY_CLOTHING_TYPE, clothingType);
         }
         // limit query to latest 20 items
@@ -329,16 +319,16 @@ public class WardrobeFragment extends Fragment {
             public void done(List<Clothing> clothes, ParseException e) {
                 // check for errors
                 if (e != null) {
-                    Log.e("WardrobeFragment", "Issue with getting clothing", e);
                     return;
                 }
                 // save received posts to list and notify adapter of new data
                 allClothing.addAll(clothes);
                 adapter.notifyDataSetChanged();
-                Log.i("WARDROBE FRAGMENT CLOTHES", "" + allClothing.size());
             }
         });
 
 
     }
+
+
 }

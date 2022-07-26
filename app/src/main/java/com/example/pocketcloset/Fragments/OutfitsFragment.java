@@ -1,7 +1,6 @@
 package com.example.pocketcloset.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pocketcloset.R;
-import com.example.pocketcloset.adapters.ClothingAdapter;
 import com.example.pocketcloset.adapters.OutfitsAdapter;
-import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -110,7 +107,6 @@ public class OutfitsFragment extends Fragment {
         // specify what type of data we want to query - Post.class
         ParseQuery<Outfit> query = ParseQuery.getQuery(Outfit.class);
         // include data referred by user key
-        Log.i("WardrobeFragment", "queryClothes(with params) ran");
         query.include(Outfit.KEY_OUTFIT_NAME);
         query.include(Outfit.KEY_BOTTOMS);
         query.include(Outfit.KEY_TOP);
@@ -133,13 +129,12 @@ public class OutfitsFragment extends Fragment {
             public void done(List<Outfit> outfits, ParseException e) {
                 // check for errors
                 if (e != null) {
-                    Log.e("WardrobeFragment", "Issue with getting clothing", e);
                     return;
                 }
                 // save received posts to list and notify adapter of new data
                 allOutfits.addAll(outfits);
                 adapter.notifyDataSetChanged();
-                Log.i("WARDROBE FRAGMENT CLOTHES", "" + allOutfits.size());
+
             }
         });
 
