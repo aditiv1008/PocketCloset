@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,11 +71,17 @@ public class ProfileFragment extends BaseFragment {
     RecyclerView rvLeastWornShifted;
     ConstraintLayout hiddenLayout;
     ConstraintLayout hiddenLayout2;
+    private ImageView ivSprite;
+    private ImageView ivSprite2;
+    private ImageView ivSprite4;
     private ImageView ivProfilePic;
     private TextView tvUsername;
     private TextView tvClothes;
     private TextView tvClothesCount;
     private Integer size;
+    private AnimationDrawable anim;
+    private AnimationDrawable anim2;
+    private AnimationDrawable anim4;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -135,9 +142,12 @@ public class ProfileFragment extends BaseFragment {
         dividerHide.setVisibility(View.GONE);
         hiddenLayout.setVisibility(View.GONE);
 
+
+
         allClothing = new ArrayList<>();
-        query:
-        queryLeastWornClothes();
+
+       queryMostWornClothes();
+       queryLeastWornClothes();
         mostWorn = new ArrayList<>();
         leastWorn = new ArrayList<>();
         tvClothesCount.setText("" + size);
@@ -145,6 +155,7 @@ public class ProfileFragment extends BaseFragment {
 
         mostWornAdapter = new ClothingAdapter(getContext(), mostWorn);
         leastWornAdapter = new ClothingAdapter(getContext(), leastWorn);
+
         arrow = view.findViewById(R.id.arrow);
         arrow2 = view.findViewById(R.id.arrow2);
 
@@ -223,6 +234,7 @@ public class ProfileFragment extends BaseFragment {
                     tvLeastWorn.setVisibility(View.VISIBLE);
                     arrow2.setVisibility(View.VISIBLE);
                     arrow.setImageResource(R.drawable.ic_expand_more);
+                    arrow3.setImageResource(R.drawable.ic_expand_more);
                 }
 
                 // If the CardView is not expanded, set its visibility
@@ -296,6 +308,7 @@ public class ProfileFragment extends BaseFragment {
             Collections.sort(clothing, (d1, d2) -> {
                 return d2.getWornCount() - d1.getWornCount();
             });
+
         }
 
         if (clothing != null && clothing.size() > 0) {
@@ -319,19 +332,24 @@ public class ProfileFragment extends BaseFragment {
         return null;
     }
 
-    protected void queryClothes(ClothingType clothingType, String worn, ClothingAdapter adapter) {
+    protected void queryClothes(String clothingType, Integer worn, ClothingAdapter adapter, List<Clothing> clothingList) {
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
         query.include(Clothing.KEY_CLOTHING_IMAGE);
         query.whereEqualTo(Clothing.KEY_USER, user);
+        if (clothingType != null) {
+            query.whereEqualTo(Clothing.KEY_CLOTHING_TYPE, clothingType);
+        }
 
         // limit query to latest 20 items
         query.setLimit(1);
         // order posts by creation date (newest first)
-        if (worn == "most worn") {
+        if (worn == 1) {
             query.addDescendingOrder("wornCount");
-        } else {
+        }
+        if (worn == 2) {
             query.addAscendingOrder("wornCount");
+        }
 
             query.findInBackground(new FindCallback<Clothing>() {
                 @Override
@@ -342,15 +360,16 @@ public class ProfileFragment extends BaseFragment {
                     }
                     // save received posts to list and notify adapter of new data'
                     adapter.clear();
-                    allClothing.addAll(clothes);
+                    clothingList.addAll(clothes);
                     adapter.notifyDataSetChanged();
                 }
             });
         }
-    }
+
 
 
     protected void queryMostWornClothes() {
+
         // specify what type of data we want to query - Post.class
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
@@ -374,6 +393,7 @@ public class ProfileFragment extends BaseFragment {
                 allClothing.addAll(clothes);
                 mostWornAdapter.notifyDataSetChanged();
 
+                Log.i("CLOTHINGGGG", ""+ filterClothing(allClothing, ClothingType.TOP));
                 if ((MostWorn(ClothingType.TOP) != null)) {
                     mostWorn.add(MostWorn(ClothingType.TOP));
                 }
@@ -410,15 +430,15 @@ public class ProfileFragment extends BaseFragment {
     }
 
     protected void queryLeastWornClothes() {
+
         // specify what type of data we want to query - Post.class
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
-        Log.i("WardrobeFragment", "queryClothes(with params) ran");
         query.include(Clothing.KEY_CLOTHING_IMAGE);
         query.whereEqualTo(Clothing.KEY_USER, user);
 
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(80);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
@@ -433,6 +453,8 @@ public class ProfileFragment extends BaseFragment {
                 leastWornAdapter.clear();
                 allClothing.addAll(clothes);
                 leastWornAdapter.notifyDataSetChanged();
+
+
 
                 if ((LeastWorn(ClothingType.TOP) != null)) {
                     leastWorn.add(LeastWorn(ClothingType.TOP));

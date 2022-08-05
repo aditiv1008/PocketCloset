@@ -5,6 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <ImageView
+        android:id="@+id/ivSprite"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButton"
         android:layout_width="99dp"
@@ -157,7 +167,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346">
+        app:layout_constraintVertical_bias="0.468">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvClothes"
@@ -175,20 +185,6 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="560dp"
-        android:backgroundTint="@color/white"
-        android:text="Back"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -208,6 +204,29 @@
         app:layout_constraintVertical_bias="0.902"
         app:srcCompat="@drawable/sparkle"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="160dp"
+        android:backgroundTint="@color/white"
+        android:text="Back"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivSprite2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton"
+        app:layout_constraintTop_toTopOf="@+id/swipeContainer"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

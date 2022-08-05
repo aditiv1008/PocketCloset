@@ -25,7 +25,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/highheel"
+        android:icon="@drawable/sprite_animation"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/highheel"
         android:supportsRtl="true"

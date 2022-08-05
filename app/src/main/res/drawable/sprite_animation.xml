@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/tile143" android:duration = "80" />
+    <item android:drawable="@drawable/tile144" android:duration = "80" />
+    <item android:drawable="@drawable/tile145" android:duration = "80" />
+    <item android:drawable="@drawable/tile146" android:duration = "80" />
+    <item android:drawable="@drawable/tile147" android:duration = "80" />
+    <item android:drawable="@drawable/tile148" android:duration = "80" />
+    <item android:drawable="@drawable/tile149" android:duration = "80" />
+    <item android:drawable="@drawable/tile150" android:duration = "80" />
+</animation-list>

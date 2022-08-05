@@ -104,7 +104,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        bottomNavigation.setSelectedItemId(R.id.action_camera);
+        if(getIntent().hasExtra("fragment")){
+            bottomNavigation.setSelectedItemId(getIntent().getIntExtra("fragment", R.id.action_camera));
+        } else {
+            bottomNavigation.setSelectedItemId(R.id.action_camera);
+        }
+
+
     }
 
     public void onLogoutButton(View view) {

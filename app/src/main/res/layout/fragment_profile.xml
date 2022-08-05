@@ -8,6 +8,16 @@
     android:orientation="vertical">
 
 
+    <ImageView
+        android:id="@+id/ivSprite2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvMostWorn"
+        app:layout_constraintEnd_toEndOf="@+id/rvMostWorn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvMostWorn"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <View
         android:id="@+id/dividerHide"
         android:layout_width="match_parent"
@@ -189,13 +199,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/hiddenLayout"
-        android:layout_width="390dp"
-        android:layout_height="200dp"
+        android:layout_width="412dp"
+        android:layout_height="197dp"
         android:layout_margin="0dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerHide1"
-        tools:layout_editor_absoluteY="504dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerHide1">
 
         <ImageButton
             android:id="@+id/arrow3"
@@ -229,13 +238,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLeastWornShifted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginBottom="-11dp"
+            android:layout_width="412dp"
+            android:layout_height="188dp"
             android:clipToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerShifted2" />
 
         <TextView
             android:id="@+id/tvLeastWornShifted"
@@ -247,7 +254,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dividerShifted" />
 
+        <ImageView
+            android:id="@+id/ivSprite4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rvLeastWornShifted"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvLeastWornShifted"
+            tools:ignore="NotSibling"
+            tools:srcCompat="@tools:sample/avatars" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivSprite"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/dividerHide"
+        app:layout_constraintEnd_toEndOf="@+id/rvLeastWorn"
+        app:layout_constraintStart_toStartOf="@+id/rvLeastWorn"
+        app:layout_constraintTop_toTopOf="@+id/rvLeastWorn"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

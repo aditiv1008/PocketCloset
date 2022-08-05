@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.example.pocketcloset.Fragments.OutfitsFragment;
+import com.example.pocketcloset.adapters.OutfitsAdapter;
 import com.example.pocketcloset.adapters.RandomizedAdapter;
 import com.example.pocketcloset.models.Clothing;
 import com.example.pocketcloset.models.Outfit;
@@ -81,6 +82,10 @@ public class RandomizedView extends AppCompatActivity {
     private RecyclerView rvRandomBracelet;
     private SnapHelper topSnapHelper;
     private SnapHelper bottomsSnapHelper;
+    private SnapHelper braceletSnapHelper;
+    private SnapHelper earringsSnapHelper;
+    private SnapHelper neckwearSnapHelper;
+    private SnapHelper headwearSnapHelper;
     private SnapHelper overwearSnapHelper;
     private SnapHelper shoesSnapHelper;
     private SnapHelper handheldSnapHelper;
@@ -161,13 +166,26 @@ public class RandomizedView extends AppCompatActivity {
         rvRandomBottoms.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         queryClothesRandom(ClothingType.PANTS, bottomsAdapter, randomBottoms);
         queryClothesRandom(ClothingType.DRESS, bottomsAdapter, randomBottoms);
+        queryClothesRandom(ClothingType.SKIRT, bottomsAdapter, randomBottoms);
         topSnapHelper = new PagerSnapHelper();
         topSnapHelper.attachToRecyclerView(rvRandomTops);
         bottomsSnapHelper = new PagerSnapHelper();
         bottomsSnapHelper.attachToRecyclerView(rvRandomBottoms);
         shoesSnapHelper = new PagerSnapHelper();
         shoesSnapHelper.attachToRecyclerView(rvRandomShoes);
-
+        headwearSnapHelper = new PagerSnapHelper();
+        headwearSnapHelper.attachToRecyclerView(rvRandomHeadwear);
+        earringsSnapHelper = new PagerSnapHelper();
+        earringsSnapHelper.attachToRecyclerView(rvRandomEarrings);
+        overwearSnapHelper = new PagerSnapHelper();
+        overwearSnapHelper.attachToRecyclerView(rvRandomOverwear);
+        neckwearSnapHelper = new PagerSnapHelper();
+        neckwearSnapHelper.attachToRecyclerView(rvRandomNeckwear);
+        braceletSnapHelper = new PagerSnapHelper();
+        braceletSnapHelper.attachToRecyclerView(rvRandomBracelet);
+        handheldSnapHelper = new PagerSnapHelper();
+        handheldSnapHelper.attachToRecyclerView(rvRandomHandheld);
+        Toast.makeText(this, "Slide on any article of clothing to change it", Toast.LENGTH_LONG).show();
 
         ibAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,10 +263,13 @@ public class RandomizedView extends AppCompatActivity {
                                 if (e != null) {
                                     Log.e("RANDOMIZED VIEW", "Error while saving", e);
                                     Toast.makeText(RandomizedView.this, "Error while saving", Toast.LENGTH_SHORT);
+
                                 }
+                                goToOutfitsFragment();
 
                             }
                         });
+
 
 
                     }
@@ -336,6 +357,12 @@ public class RandomizedView extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    protected void goToOutfitsFragment () {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("fragment", R.id.action_outfits);
+        startActivity(intent);
     }
 
     protected void queryClothes(@Nullable String clothingType) {

@@ -10,10 +10,12 @@
         android:id="@+id/rlContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.495" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -26,19 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_bottom_navigation" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp"
-        android:onClick="onLogoutButton"
-        android:text="Logout"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Toolbar
         android:id="@+id/toolbar"
@@ -48,7 +37,46 @@
         android:minHeight="?android:attr/actionBarSize"
         android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="46dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/logout"
+        android:backgroundTint="@color/black"
+        android:onClick="onLogoutButton"
+        android:text="Logout"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/imageView"
+        android:layout_width="168dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="70dp"
+        android:fontFamily="@font/pacifico"
+
+        android:text="PocketCloset"
+        android:textColor="#070606"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="44dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="10dp"
+        android:background="@mipmap/highheel"
+        android:backgroundTint="@color/black"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

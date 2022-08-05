@@ -1,10 +1,12 @@
 package com.example.pocketcloset.Fragments;
 
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -43,11 +45,20 @@ public class OutfitsFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private RecyclerView rvOutfits;
     private ParseUser user;
+    private ImageView ivSprite;
+    private AnimationDrawable anim;
 
     public OutfitsFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.clear();
+        queryOutfits();
+        adapter.notifyDataSetChanged();
+    }
 
     public static OutfitsFragment newInstance(String param1, String param2) {
         OutfitsFragment fragment = new OutfitsFragment();
@@ -77,6 +88,10 @@ public class OutfitsFragment extends Fragment {
         allOutfits = new ArrayList<>();
         adapter = new OutfitsAdapter(getContext(), allOutfits);
         rvOutfits = view.findViewById(R.id.rvOutfits);
+        ivSprite = view.findViewById(R.id.ivSprite);
+        ivSprite.setBackgroundResource(R.drawable.sprite_animation);
+        ivSprite.setVisibility(View.GONE);
+        anim = (AnimationDrawable) ivSprite.getBackground();
 
         rvOutfits.setAdapter(adapter);
         // set the layout manager on the recycler view
@@ -114,6 +129,8 @@ public class OutfitsFragment extends Fragment {
     }
 
     protected void queryOutfits() {
+        ivSprite.setVisibility(View.VISIBLE);
+        anim.start();
         // specify what type of data we want to query - Post.class
         ParseQuery<Outfit> query = ParseQuery.getQuery(Outfit.class);
         // include data referred by user key
@@ -144,6 +161,8 @@ public class OutfitsFragment extends Fragment {
                 // save received posts to list and notify adapter of new data
                 allOutfits.addAll(outfits);
                 adapter.notifyDataSetChanged();
+                ivSprite.setVisibility(View.GONE);
+                anim.stop();
 
             }
         });

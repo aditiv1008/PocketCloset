@@ -1,12 +1,16 @@
 package com.example.pocketcloset.Fragments;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,6 +61,10 @@ public class WardrobeFragment extends Fragment {
     private Button btnHandhelds;
     private Button btnBracelet;
     private FloatingActionButton btnRandomize;
+    private AnimationDrawable anim;
+    private AnimationDrawable anim2;
+    private ImageView ivSprite;
+    private ImageView ivSprite2;
 
     public WardrobeFragment() {
         // Require d empty public constructor
@@ -112,6 +120,14 @@ public class WardrobeFragment extends Fragment {
         btnSkirt = view.findViewById(R.id.btnSkirt);
         allClothing = new ArrayList<>();
         adapter = new ClothingAdapter(getContext(), allClothing);
+        ivSprite = view.findViewById(R.id.ivSprite);
+        ivSprite2 = view.findViewById(R.id.ivSprite2);
+        ivSprite2.setBackgroundResource(R.drawable.sprite_animation);
+        ivSprite.setBackgroundResource(R.drawable.sprite_animation);
+        ivSprite.setVisibility(View.GONE);
+        anim = (AnimationDrawable) ivSprite.getBackground();
+        anim2 = (AnimationDrawable) ivSprite2.getBackground();
+
 
         rvWardrobe.setAdapter(adapter);
         // set the layout manager on the recycler view
@@ -130,6 +146,7 @@ public class WardrobeFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 adapter.clear();
                 queryClothes(null);
                 adapter.notifyDataSetChanged();
@@ -141,12 +158,30 @@ public class WardrobeFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        final Handler handler = new Handler();
+
 
         btnRandomize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), RandomizedView.class);
-                startActivity(i);
+                ivSprite.setVisibility(View.VISIBLE);
+                toggleButton.setVisibility(View.GONE);
+                btnRandomize.setVisibility(View.GONE);
+                rvWardrobe.setVisibility(View.GONE);
+                anim.start();
+
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        startActivity(i);
+                        anim.stop();
+
+                    }
+                }, 2000);
+
             }
         });
 
@@ -296,11 +331,18 @@ public class WardrobeFragment extends Fragment {
             }
         });
 
+
         queryClothes(null);
+
+
+
+
     }
 
 
     protected void queryClothes(@Nullable String clothingType) {
+        ivSprite2.setVisibility(View.VISIBLE);
+        anim2.start();
         // specify what type of data we want to query - Post.class
         ParseQuery<Clothing> query = ParseQuery.getQuery(Clothing.class);
         // include data referred by user key
@@ -310,7 +352,7 @@ public class WardrobeFragment extends Fragment {
             query.whereEqualTo(Clothing.KEY_CLOTHING_TYPE, clothingType);
         }
         // limit query to latest 20 items
-        query.setLimit(20);
+        query.setLimit(50);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
@@ -322,10 +364,20 @@ public class WardrobeFragment extends Fragment {
                     return;
                 }
                 // save received posts to list and notify adapter of new data
+
+
                 allClothing.addAll(clothes);
                 adapter.notifyDataSetChanged();
+                ivSprite2.setVisibility(View.GONE);
+                anim2.stop();
             }
         });
+
+
+
+
+
+
 
 
     }
