@@ -1,25 +1,33 @@
 package com.example.pocketcloset.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.pocketcloset.R;
+import com.example.pocketcloset.SwipeToDeleteCallback;
 import com.example.pocketcloset.adapters.OutfitsAdapter;
 import com.example.pocketcloset.models.Outfit;
+import com.google.android.material.snackbar.Snackbar;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +109,8 @@ public class OutfitsFragment extends Fragment {
 
 
         queryOutfits();
+        enableSwipeToDeleteAndUndo();
+
     }
 
     protected void queryOutfits() {
@@ -139,5 +149,48 @@ public class OutfitsFragment extends Fragment {
         });
 
 
+
+
+    }
+
+    private void enableSwipeToDeleteAndUndo() {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                final Outfit item = adapter.getData().get(position);
+                final Outfit item_undelete = adapter.getData().get(position);
+
+                adapter.removeItem(position);
+                item.deleteInBackground();
+
+
+                Snackbar snackbar = Snackbar
+                        .make(rvOutfits, "Item was removed from the list.", Snackbar.LENGTH_LONG);
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        adapter.restoreItem(item, position);
+                        item_undelete.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+
+                            }
+                        });
+                        rvOutfits.scrollToPosition(position);
+                    }
+                });
+
+                snackbar.setActionTextColor(Color.YELLOW);
+                snackbar.show();
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(rvOutfits);
     }
 }

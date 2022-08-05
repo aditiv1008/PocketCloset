@@ -55,6 +55,8 @@ public class SaveClothingView extends AppCompatActivity {
         toggleButtonBottoms.setVisibility(View.GONE);
         toggleAccessories.setVisibility(View.GONE);
 
+
+
         toggleButton.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
